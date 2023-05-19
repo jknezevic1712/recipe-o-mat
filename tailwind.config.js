@@ -6,6 +6,10 @@ module.exports = {
       screens: {
         "3xl": "2560px",
       },
+      aspectRatio: {
+        "2/1": "2 / 1",
+        "3/2": "3 / 2",
+      },
       // keyframes: {
       //   dropdownEnter: {
       //     "0%": {

@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
+import { RecipeTileComponent } from './shared/recipe-tile/recipe-tile.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LayoutComponent } from './layout/layout.component';
     ProfileComponent,
     RecipesComponent,
     HeaderComponent,
-    LayoutComponent
+    LayoutComponent,
+    RecipeTileComponent
   ],
   imports: [
     BrowserModule,
