@@ -1,5 +1,5 @@
 <header
-  class="flex justify-between items-center sticky top-0 w-full p-4 shadow-xl bg-amber-500 bg-opacity-90 text-zinc-900 z-10"
+  class="flex justify-between items-center sticky top-0 w-full p-4 shadow-xl bg-zinc-100 bg-opacity-90 text-zinc-900 z-10"
   (keydown)="handleKeyboardMenuClose($event)"
 >
   <a routerLink="" class="2xl:text-2xl font-bold italic">Recipe-O-Mat</a>
@@ -43,6 +43,9 @@
     >
       <a
         routerLinkActive="bg-zinc-300"
+        [routerLinkActiveOptions]="{
+          exact: true
+        }"
         routerLink=""
         class="block px-4 py-3 text-sm hover:bg-zinc-300"
         tabindex="-1"

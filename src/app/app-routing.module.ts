@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthorizationComponent } from './authorization/authorization.component';
-import { RecipesComponent } from './recipes/recipes.component';
 
 const routes: Routes = [
   {
@@ -22,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: RecipesComponent,
+    loadChildren: () =>
+      import('./recipes/recipes.module').then((mod) => mod.RecipesModule),
   },
 ];
 

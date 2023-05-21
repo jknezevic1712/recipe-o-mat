@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { ProfileComponent } from './profile/profile.component';
-import { RecipesComponent } from './recipes/recipes.component';
 import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RecipeTileComponent } from './shared/recipe-tile/recipe-tile.component';
@@ -17,16 +16,11 @@ import { RecipeTileComponent } from './shared/recipe-tile/recipe-tile.component'
     HomepageComponent,
     AuthorizationComponent,
     ProfileComponent,
-    RecipesComponent,
     HeaderComponent,
     LayoutComponent,
-    RecipeTileComponent
+    RecipeTileComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
