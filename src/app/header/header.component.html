@@ -1,12 +1,12 @@
 <header
-  class="fixed top-0 z-10 flex w-full items-center justify-between bg-zinc-100 bg-opacity-70 p-4 text-zinc-900 shadow-xl"
+  class="fixed top-0 z-10 flex h-16 w-full items-center justify-between bg-zinc-100 bg-opacity-70 p-4 text-zinc-900 shadow-xl"
   (keydown)="handleKeyboardMenuClose($event)"
 >
   <a routerLink="" class="font-bold italic 2xl:text-2xl">Recipe-O-Mat</a>
   <div class="h-8 md:hidden">
     <button
       type="button"
-      class="h-8 focus-visible:outline-none"
+      class="h-full focus-visible:outline-none"
       (click)="handleMenu()"
     >
       <svg
@@ -89,24 +89,25 @@
         exact: true
       }"
       routerLink=""
-      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Home</a
     >
     <a
       routerLinkActive="bg-zinc-300"
       routerLink="/recipes"
-      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Recipes</a
     >
     <a
       routerLinkActive="bg-zinc-300"
       routerLink="/profile"
-      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Profile</a
     >
+    <hr class="mx-3 my-auto h-8 w-[1px] bg-amber-500" />
     <a
       [routerLink]="!user ? '/auth' : ''"
-      class="px-4 py-2 text-sm text-zinc-100"
+      class="border-b border-b-transparent px-4 py-2 text-sm text-zinc-100"
       [ngClass]="
         !user ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'
       "

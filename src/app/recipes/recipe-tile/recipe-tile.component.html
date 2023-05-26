@@ -1,27 +1,27 @@
 <a
-  class="flex flex-col items-start justify-between transition-all hover:bg-amber-500 hover:bg-opacity-75 rounded-2xl"
+  class="flex flex-col items-start justify-between rounded-2xl transition-all hover:bg-amber-500 hover:bg-opacity-75"
   [routerLink]="'/recipes/' + recipeIndex"
 >
-  <div class="w-full relative">
+  <div class="relative w-full">
     <img
       [src]="recipe.imageUrl"
-      class="aspect-video sm:aspect-2/1 lg:aspect-3/2 object-cover rounded-2xl w-full h-auto max-w-full block align-middle"
+      class="block aspect-video h-auto w-full max-w-full rounded-2xl object-cover align-middle sm:aspect-2/1 lg:aspect-3/2"
     />
   </div>
-  <div class="w-full flex flex-col justify-center p-2">
+  <div class="flex w-full flex-col justify-center p-2 text-zinc-900">
     <!-- <div class="text-xs gap-x-4 items-center flex mt-8">{{ recipeIndex }}</div> -->
     <div class="relative mt-8">
-      <h3 class="text-lg leading-6 font-semibold mt-3">
+      <h3 class="mt-3 text-lg font-semibold leading-6">
         {{ recipe.name }}
       </h3>
-      <p class="text-sm leading-6 overflow-hidden mt-5">
+      <p class="mt-5 overflow-hidden text-sm leading-6">
         {{ recipe.description }}
       </p>
     </div>
-    <div class="gap-x-4 flex items-center mt-8 relative text-lg">
+    <div class="relative mt-8 flex items-center gap-x-4 text-lg">
       <img
         [src]=""
-        class="rounded-full w-10 h-10 max-w-full block align-middle"
+        class="block h-10 w-10 max-w-full rounded-full align-middle"
       />
       <div class="text-sm leading-6">
         <p class="font-semibold">Jakov Knežević</p>
