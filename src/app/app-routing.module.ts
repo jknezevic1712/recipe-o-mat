@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthorizationComponent } from './authorization/authorization.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,17 +14,19 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthorizationComponent,
+    component: AuthComponent,
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'recipes',
     loadChildren: () =>
       import('./recipes/recipes.module').then((mod) => mod.RecipesModule),
   },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

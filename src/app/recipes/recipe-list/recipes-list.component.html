@@ -1,0 +1,11 @@
+<div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div
+    class="mx-auto grid max-w-2xl grid-cols-1 lg:grid-cols-2 lg:max-w-none xl:grid-cols-3 lg:mx-0 gap-y-20 gap-x-8"
+  >
+    <app-recipe-tile
+      *ngFor="let recipe of recipes; let i = index"
+      [recipe]="recipe"
+      [recipeIndex]="i"
+    ></app-recipe-tile>
+  </div>
+</div>

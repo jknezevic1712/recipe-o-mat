@@ -1,11 +1,33 @@
-<div class="mx-auto max-w-7xl px-6 lg:px-8">
-  <div
-    class="mx-auto grid max-w-2xl grid-cols-1 lg:grid-cols-2 lg:max-w-none xl:grid-cols-3 lg:mx-0 gap-y-20 gap-x-8"
-  >
-    <app-recipe-tile
-      *ngFor="let recipe of recipes; let i = index"
-      [recipe]="recipe"
-      [recipeIndex]="i"
-    ></app-recipe-tile>
+<div class="max-w-7xl px-6 lg:px-8 flex flex-1 justify-center items-center">
+  <img
+    class="absolute top-0 left-0 object-cover object-center w-full h-full -z-10"
+    src="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg"
+    alt="Food"
+  />
+  <div class="flex justify-center items-center flex-col">
+    <div
+      class="max-w-lg text-center flex justify-center flex-col items-center bg-amber-500 p-4 opacity-90 shadow-xl"
+    >
+      <p class="italic text-lg xl:text-xl 3xl:text-2xl max-w-md 3xl:max-w-full">
+        “Food brings people together on many different levels. It’s nourishment
+        of the soul and body; it’s truly love.”
+        <span class="text-zinc-900"
+          >– <strong>Giada De Laurentiis</strong></span
+        >
+      </p>
+    </div>
+    <span class="w-full pt-6">
+      <button
+        class="group relative h-12 w-48 overflow-hidden bg-zinc-100 bg-opacity-70 text-lg shadow-xl transition-all hover:bg-opacity-100"
+      >
+        <div
+          class="absolute inset-0 w-full bg-amber-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+        ></div>
+        <span
+          class="relative text-zinc-100 transition-all group-hover:text-zinc-900"
+          >Find Recipes!</span
+        >
+      </button>
+    </span>
   </div>
 </div>
