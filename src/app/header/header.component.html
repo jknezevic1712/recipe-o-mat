@@ -1,83 +1,117 @@
 <header
-  class="flex justify-between items-center fixed top-0 w-full p-4 shadow-xl bg-zinc-100 bg-opacity-70 text-zinc-900 z-10"
+  class="fixed top-0 z-10 flex w-full items-center justify-between bg-zinc-100 bg-opacity-70 p-4 text-zinc-900 shadow-xl"
   (keydown)="handleKeyboardMenuClose($event)"
 >
-  <a routerLink="" class="2xl:text-2xl font-bold italic">Recipe-O-Mat</a>
-  <button
-    type="button"
-    class="h-8 focus-visible:outline-none"
-    (click)="handleMenu()"
-  >
-    <svg
-      class="h-full w-auto"
-      [ngClass]="!isMenuOpen ? 'block' : 'hidden'"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
+  <a routerLink="" class="font-bold italic 2xl:text-2xl">Recipe-O-Mat</a>
+  <div class="h-8 md:hidden">
+    <button
+      type="button"
+      class="h-8 focus-visible:outline-none"
+      (click)="handleMenu()"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-      />
-    </svg>
-    <svg
-      class="h-full w-auto"
-      [ngClass]="isMenuOpen ? 'block' : 'hidden'"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
+      <svg
+        class="h-full w-auto"
+        [ngClass]="!isMenuOpen ? 'block' : 'hidden'"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+      <svg
+        class="h-full w-auto"
+        [ngClass]="isMenuOpen ? 'block' : 'hidden'"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+      <div
+        class="absolute right-4 mt-6 w-48 origin-top-right rounded-md bg-zinc-100 text-zinc-900 shadow-lg transition-all ease-in-out focus:outline-none"
+        [ngClass]="isMenuOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'"
+        tabindex="-1"
+      >
+        <a
+          routerLinkActive="bg-zinc-300"
+          [routerLinkActiveOptions]="{
+            exact: true
+          }"
+          routerLink=""
+          class="block px-4 py-3 text-sm hover:bg-zinc-300"
+          tabindex="-1"
+          >Home</a
+        >
+        <a
+          routerLinkActive="bg-zinc-300"
+          routerLink="/recipes"
+          class="block px-4 py-3 text-sm hover:bg-zinc-300"
+          tabindex="-1"
+          >Recipes</a
+        >
+        <a
+          routerLinkActive="bg-zinc-300"
+          routerLink="/profile"
+          class="block px-4 py-3 text-sm hover:bg-zinc-300"
+          tabindex="-1"
+          >Profile</a
+        >
+        <hr class="mx-auto my-5 w-4/5 border-t-[1px] border-amber-500" />
+        <a
+          [routerLink]="!user ? '/auth' : ''"
+          class="block px-4 py-3 text-sm text-zinc-100"
+          [ngClass]="
+            !user
+              ? 'bg-blue-500 hover:bg-blue-600'
+              : 'bg-red-500 hover:bg-red-600'
+          "
+          tabindex="-1"
+          (click)="handleAuth()"
+          >{{ user ? "Sign Out" : "Sign In" }}</a
+        >
+      </div>
+    </button>
+  </div>
+  <div class="hidden md:flex">
+    <a
+      routerLinkActive="bg-zinc-300"
+      [routerLinkActiveOptions]="{
+        exact: true
+      }"
+      routerLink=""
+      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      >Home</a
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-    <div
-      class="absolute right-4 mt-6 w-48 origin-top-right rounded-md bg-zinc-100 text-zinc-900 shadow-lg focus:outline-none transition-all ease-in-out"
-      [ngClass]="isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0'"
-      tabindex="-1"
+    <a
+      routerLinkActive="bg-zinc-300"
+      routerLink="/recipes"
+      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      >Recipes</a
     >
-      <a
-        routerLinkActive="bg-zinc-300"
-        [routerLinkActiveOptions]="{
-          exact: true
-        }"
-        routerLink=""
-        class="block px-4 py-3 text-sm hover:bg-zinc-300"
-        tabindex="-1"
-        >Home</a
-      >
-      <a
-        routerLinkActive="bg-zinc-300"
-        routerLink="/recipes"
-        class="block px-4 py-3 text-sm hover:bg-zinc-300"
-        tabindex="-1"
-        >Recipes</a
-      >
-      <a
-        routerLinkActive="bg-zinc-300"
-        routerLink="/profile"
-        class="block px-4 py-3 text-sm hover:bg-zinc-300"
-        tabindex="-1"
-        >Profile</a
-      >
-      <hr class="my-5 border-t-[1px] border-amber-500 w-4/5 mx-auto" />
-      <a
-        [routerLink]="!user ? '/auth' : ''"
-        class="block px-4 py-3 text-sm text-zinc-100"
-        [ngClass]="
-          !user
-            ? 'bg-blue-500 hover:bg-blue-600'
-            : 'bg-red-500 hover:bg-red-600'
-        "
-        tabindex="-1"
-        (click)="handleAuth()"
-        >{{ user ? "Sign Out" : "Sign In" }}</a
-      >
-    </div>
-  </button>
+    <a
+      routerLinkActive="bg-zinc-300"
+      routerLink="/profile"
+      class="px-4 py-2 text-sm hover:bg-zinc-300"
+      >Profile</a
+    >
+    <a
+      [routerLink]="!user ? '/auth' : ''"
+      class="px-4 py-2 text-sm text-zinc-100"
+      [ngClass]="
+        !user ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'
+      "
+      (click)="handleAuth()"
+      >{{ user ? "Sign Out" : "Sign In" }}</a
+    >
+  </div>
 </header>
