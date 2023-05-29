@@ -9,7 +9,7 @@ export interface RecipesState {
 const initialState: RecipesState = {
   recipes: [
     {
-      name: 'Test',
+      name: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero qui aperiam aspernatur eveniet quia velit modi maiores earum rem voluptatum sapiente id repudiandae facere est labore assumenda, possimus dolores error consequatur neque? Distinctio, iste beatae! Minima hic nostrum animi, eaque ullam in velit enim dicta! Nemo nisi impedit excepturi dolor?',
       description: 'Test description!',
       imageUrl:
         'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
