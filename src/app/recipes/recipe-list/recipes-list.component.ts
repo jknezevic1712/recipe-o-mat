@@ -12,7 +12,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
@@ -35,7 +35,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
@@ -58,7 +58,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
@@ -81,7 +81,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
@@ -104,7 +104,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
@@ -127,7 +127,7 @@ export class RecipesListComponent {
       name: 'Test',
       description: 'Test description!',
       imageUrl:
-        'https://sasina-kuhinja.com/wp-content/uploads/2019/10/vojni%C4%8Dki_grah_army_beans.jpg',
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onion',
