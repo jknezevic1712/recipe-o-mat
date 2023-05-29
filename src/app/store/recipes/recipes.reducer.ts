@@ -1,4 +1,4 @@
-import { Recipe, Ingredient } from 'src/app/recipes/recipe.model';
+import { Recipe } from 'src/app/recipes/recipe.model';
 import { RECIPE_ACTIONS, RecipesActionTypes } from './recipes.actions';
 
 export interface RecipesState {
@@ -7,7 +7,238 @@ export interface RecipesState {
 }
 
 const initialState: RecipesState = {
-  recipes: null,
+  recipes: [
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+    {
+      name: 'Test',
+      description: 'Test description!',
+      imageUrl:
+        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      ingredients: [
+        {
+          name: 'Onion',
+          amount: '200',
+          unit: 'g',
+        },
+        {
+          name: 'Tomatoes',
+          amount: '5',
+          unit: 'pieces',
+        },
+        {
+          name: 'Meat',
+          amount: '500',
+          unit: 'g',
+        },
+      ],
+    },
+  ],
   loading: false,
 };
 

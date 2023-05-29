@@ -1,150 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
 })
-export class RecipesListComponent {
-  recipes: Recipe[] = [
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-    {
-      name: 'Test',
-      description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      ingredients: [
-        {
-          name: 'Onion',
-          amount: '200',
-          unit: 'g',
-        },
-        {
-          name: 'Tomatoes',
-          amount: '5',
-          unit: 'pieces',
-        },
-        {
-          name: 'Meat',
-          amount: '500',
-          unit: 'g',
-        },
-      ],
-    },
-  ];
+export class RecipesListComponent implements OnInit, OnDestroy {
+  private recipesSub: Subscription;
+  recipes: Recipe[] = null;
+
+  constructor(private store: Store<AppState>) {}
+
+  ngOnInit(): void {
+    this.recipesSub = this.store
+      .select('recipes', 'recipes')
+      .subscribe((recipeList) => {
+        this.recipes = recipeList;
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.recipesSub) {
+      this.recipesSub.unsubscribe();
+    }
+  }
 }
