@@ -63,6 +63,7 @@
           >Recipes</a
         >
         <a
+          *ngIf="user"
           routerLinkActive="bg-zinc-300"
           routerLink="/profile"
           class="block px-4 py-3 text-sm hover:bg-zinc-300"
@@ -104,6 +105,7 @@
       >Recipes</a
     >
     <a
+      *ngIf="user"
       routerLinkActive="bg-zinc-300"
       routerLink="/profile"
       class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
