@@ -1,6 +1,7 @@
 <span class="w-full">
   <button
-    (click)="clickHandlerProp()"
+    [type]="btnTypeProp"
+    (click)="clickHandlerProp ? clickHandlerProp() : ''"
     [disabled]="disabledProp"
     class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
     [ngClass]="ngClassesBtnProp"
@@ -13,7 +14,7 @@
       class="relative transition-all md:text-lg xl:text-xl"
       [ngClass]="ngClassesSpanProp"
     >
-      <ng-content></ng-content>
+      {{ btnTextProp }}
     </span>
   </button>
 </span>

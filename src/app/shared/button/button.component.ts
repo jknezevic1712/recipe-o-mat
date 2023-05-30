@@ -8,6 +8,8 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() clickHandlerProp: () => void;
   @Input() disabledProp: boolean;
+  @Input() btnTypeProp: 'button' | 'submit' | 'reset';
+  @Input() btnTextProp: string;
   @Input() ngClassesBtnProp: string;
   @Input() ngClassesDivProp: string;
   @Input() ngClassesSpanProp: string;
