@@ -38,7 +38,7 @@
         />
       </svg>
       <div
-        class="absolute right-4 mt-6 w-48 origin-top-right rounded-md bg-zinc-100 text-zinc-900 shadow-lg transition-all ease-in-out focus:outline-none"
+        class="absolute right-4 mt-6 w-48 origin-top-right rounded-sm bg-zinc-100 text-zinc-900 shadow-lg transition-all ease-in-out focus:outline-none"
         [ngClass]="isMenuOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'"
         tabindex="-1"
       >
@@ -55,6 +55,9 @@
         <a
           routerLinkActive="bg-zinc-300"
           routerLink="/recipes"
+          [routerLinkActiveOptions]="{
+            exact: true
+          }"
           class="block px-4 py-3 text-sm hover:bg-zinc-300"
           tabindex="-1"
           >Recipes</a
@@ -76,7 +79,6 @@
               : 'bg-red-500 hover:bg-red-600'
           "
           tabindex="-1"
-          (click)="handleAuth()"
           >{{ user ? "Sign Out" : "Sign In" }}</a
         >
       </div>
@@ -89,7 +91,7 @@
         exact: true
       }"
       routerLink=""
-      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
+      class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Home</a
     >
     <a
@@ -98,23 +100,22 @@
       [routerLinkActiveOptions]="{
         exact: true
       }"
-      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
+      class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Recipes</a
     >
     <a
       routerLinkActive="bg-zinc-300"
       routerLink="/profile"
-      class="border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
+      class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm hover:border-b-amber-500"
       >Profile</a
     >
     <hr class="mx-3 my-auto h-8 w-[1px] bg-amber-500" />
     <a
       [routerLink]="!user ? '/auth' : ''"
-      class="border-b border-b-transparent px-4 py-2 text-sm text-zinc-100"
+      class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm text-zinc-100"
       [ngClass]="
         !user ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'
       "
-      (click)="handleAuth()"
       >{{ user ? "Sign Out" : "Sign In" }}</a
     >
   </div>

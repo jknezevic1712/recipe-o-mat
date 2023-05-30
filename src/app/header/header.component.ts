@@ -1,4 +1,16 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+
+import { User } from '../store/auth/auth.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,22 +19,25 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
     '(document:click)': 'menuOutsideClickHandler($event)',
   },
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
-  user: any = null;
+  private userSub: Subscription;
+  user: User = null;
 
   @ViewChild('navButtonElement', { static: false })
   navButtonElementRef!: ElementRef;
 
-  constructor(private _elRef: ElementRef) {}
+  constructor(private _elRef: ElementRef, private store: Store<AppState>) {}
 
-  handleAuth() {
-    if (!this.user) {
-      this.user = 'User loaded!';
-      console.log('Signed in!');
-    } else {
-      this.user = null;
-      console.log('Signed out!');
+  ngOnInit(): void {
+    this.userSub = this.store.select('auth', 'user').subscribe((userData) => {
+      this.user = userData;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSub) {
+      this.userSub.unsubscribe();
     }
   }
 

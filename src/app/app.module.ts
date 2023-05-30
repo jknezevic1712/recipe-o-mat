@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -14,6 +15,7 @@ import { LayoutComponent } from './layout/layout.component';
 
 import { appReducer } from './store/app.reducer';
 import { environment } from './environments/environment';
+import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { environment } from './environments/environment';
     ProfileComponent,
     HeaderComponent,
     LayoutComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { environment } from './environments/environment';
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
     }),
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
 })
