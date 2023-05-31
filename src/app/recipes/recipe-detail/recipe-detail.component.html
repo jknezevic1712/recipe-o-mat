@@ -1,1 +1,59 @@
-<p>recipe-detail works!</p>
+<div
+  class="mx-auto mt-16 flex w-full flex-1 flex-col items-center justify-center bg-zinc-300 px-6 lg:px-8"
+>
+  <div class="flex h-full w-full flex-col items-center justify-start py-4">
+    <img
+      [src]="recipe.imageUrl"
+      class="aspect-3/2 object-cover object-center"
+    />
+    <div
+      class="mt-8 flex h-full w-full flex-col items-start justify-start gap-4 text-start text-zinc-900"
+    >
+      <h1
+        class="w-full text-center text-xl font-bold italic text-amber-500 md:text-2xl xl:text-3xl"
+      >
+        {{ recipe.name }}
+      </h1>
+      <p class="my-20 w-full text-lg md:text-xl xl:text-2xl">
+        {{ recipe.description }}
+      </p>
+      <div
+        class="flex w-full max-w-xl flex-col items-start justify-start border border-amber-500 p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+        *ngIf="recipe.ingredients"
+      >
+        <h2 class="pb-2 font-bold text-amber-500">Ingredients:</h2>
+        <ul class="w-full">
+          <li
+            class="flex w-full items-start justify-between indent-4 italic"
+            *ngFor="let ingredient of recipe.ingredients; let index"
+            #ingredientLiEl
+            (click)="onCrossOff(ingredientLiEl)"
+          >
+            <span class="w-1/2 text-start">{{ ingredient.name }}</span>
+            <span class="w-1/2 text-end">{{
+              ingredient.amount + " " + ingredient.unit
+            }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="flex w-full flex-col items-start justify-start border border-amber-500 p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+        *ngIf="recipe.steps"
+      >
+        <h2 class="pb-2 font-bold text-amber-500">Instructions:</h2>
+        <ul class="w-full">
+          <li
+            class="my-6 flex w-full flex-col items-start justify-start indent-4 italic"
+            *ngFor="let step of recipe.steps; index as idx"
+            #stepLiEl
+            (click)="onCrossOff(stepLiEl)"
+          >
+            <span class="w-full font-bold">Step {{ idx + 1 }}:</span>
+            <span class="ml-4 mt-4 w-full">{{ step["description"] }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

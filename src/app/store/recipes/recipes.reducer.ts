@@ -38,19 +38,57 @@ const initialState: RecipesState = {
         'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
-          name: 'Onion',
+          name: 'Onions',
           amount: '200',
           unit: 'g',
         },
         {
           name: 'Tomatoes',
           amount: '5',
-          unit: 'pieces',
+          unit: 'piece(s)',
         },
         {
           name: 'Meat',
           amount: '500',
           unit: 'g',
+        },
+      ],
+      steps: [
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
+        },
+        {
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
         },
       ],
     },
