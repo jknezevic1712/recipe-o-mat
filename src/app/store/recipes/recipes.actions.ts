@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Recipe } from 'src/app/recipes/recipe.model';
+import { Recipe } from 'src/app/store/recipes/recipe.model';
 
 export enum RECIPE_ACTIONS {
   FETCH_ALL = 'FETCH_ALL',

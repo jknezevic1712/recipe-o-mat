@@ -77,7 +77,7 @@
           [ngClass]="
             !user
               ? 'bg-blue-500 hover:bg-blue-600'
-              : 'bg-red-500 hover:bg-red-600'
+              : 'bg-rose-500 hover:bg-rose-600'
           "
           tabindex="-1"
           >{{ user ? "Sign Out" : "Sign In" }}</a
@@ -116,7 +116,9 @@
       [routerLink]="!user ? '/auth' : ''"
       class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm text-zinc-100"
       [ngClass]="
-        !user ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'
+        !user
+          ? 'bg-blue-500 hover:bg-blue-600'
+          : 'bg-rose-500 hover:bg-rose-600'
       "
       >{{ user ? "Sign Out" : "Sign In" }}</a
     >

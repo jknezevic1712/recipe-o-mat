@@ -1,14 +1,15 @@
-import { Recipe } from 'src/app/recipes/recipe.model';
+import { Recipe } from 'src/app/store/recipes/recipe.model';
 import { RECIPE_ACTIONS, RecipesActionTypes } from './recipes.actions';
 
 export interface RecipesState {
-  recipes: Recipe[] | null;
+  recipes: Recipe[];
   loading: boolean;
 }
 
 const initialState: RecipesState = {
   recipes: [
     {
+      authorId: '1',
       name: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero qui aperiam aspernatur eveniet quia velit modi maiores earum rem voluptatum sapiente id repudiandae facere est labore assumenda, possimus dolores error consequatur neque? Distinctio, iste beatae! Minima hic nostrum animi, eaque ullam in velit enim dicta! Nemo nisi impedit excepturi dolor?',
       description: 'Test description!',
       imageUrl:
@@ -32,6 +33,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Spaghetti Bolognese',
       description:
         'Delicious meal that can be done with just a few ingredients!',
@@ -97,8 +99,37 @@ const initialState: RecipesState = {
             'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
         },
       ],
+      likes: 5,
+      comments: [
+        {
+          authorId: '1',
+          content: 'I like this recipe very much!',
+          date: new Date(),
+          likes: 2,
+        },
+        {
+          authorId: '3',
+          content: 'Can recommend it!',
+          date: new Date(),
+          likes: 4,
+        },
+        {
+          authorId: '2',
+          content: "I've tasted better spaghetti bolognese...",
+          date: new Date(),
+          likes: 0,
+        },
+        {
+          authorId: '4',
+          content:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum, soluta facilis officiis quos voluptate earum voluptatibus, et veritatis esse qui tenetur necessitatibus adipisci dolorum recusandae sunt minus vel dolore at sed suscipit quod aut temporibus atque. Quia veniam, praesentium deleniti odit inventore aliquid ex consequuntur magni, quisquam beatae, consectetur vitae?',
+          date: new Date(),
+          likes: 5,
+        },
+      ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -122,6 +153,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -145,6 +177,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -168,6 +201,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -191,6 +225,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -214,6 +249,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -237,6 +273,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -260,6 +297,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      authorId: '1',
       name: 'Test',
       description: 'Test description!',
       imageUrl:

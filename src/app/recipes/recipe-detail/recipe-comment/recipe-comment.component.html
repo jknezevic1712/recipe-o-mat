@@ -1,0 +1,36 @@
+<div
+  class="flex w-full flex-col items-end justify-center py-6 italic text-zinc-900"
+>
+  <span class="flex w-full">
+    <div class="flex w-full items-center">
+      <span class="flex w-fit items-center border-b border-amber-500 pb-1 pr-2">
+        <img
+          [src]=""
+          class="block h-8 w-8 max-w-full rounded-full align-middle md:h-10 md:w-10"
+        />
+        <span class="max-w-[80%] pl-4 text-sm leading-6">
+          <p class="max-w-full truncate font-semibold">Anonymous</p>
+        </span>
+      </span>
+    </div>
+  </span>
+  <div class="flex w-full flex-col md:flex-row md:items-center">
+    <span class="mr-8 flex flex-1 py-4 text-start indent-4">
+      {{ comment.content }}
+    </span>
+    <button
+      type="button"
+      class="group relative h-fit w-full max-w-full overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed md:max-w-fit md:px-8 md:py-2 3xl:px-12 3xl:py-3"
+    >
+      <div
+        class="absolute inset-0 w-full bg-rose-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+      ></div>
+      <div
+        class="relative flex text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+      >
+        <div class="absolute left-0 top-0">{{ comment.likes }}</div>
+        <span class="flex flex-1 items-center justify-center md:ml-6">🤍</span>
+      </div>
+    </button>
+  </div>
+</div>

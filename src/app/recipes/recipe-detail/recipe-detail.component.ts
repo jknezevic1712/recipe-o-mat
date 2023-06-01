@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Subscription, map, switchMap } from 'rxjs';
 
 import { AppState } from 'src/app/store/app.reducer';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../../store/recipes/recipe.model';
+import { User } from 'src/app/store/auth/auth.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,6 +15,9 @@ import { Recipe } from '../recipe.model';
 export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   recipeIndex: number;
+  user: User;
+  isUserRecipeAuthor: boolean;
+  showAddCommentModal: boolean;
   private routeSub: Subscription;
 
   constructor(
@@ -23,6 +27,10 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.store.select('auth', 'user').subscribe((user) => {
+      this.user = user;
+    });
+
     this.routeSub = this.route.params
       .pipe(
         map((params) => +params['id']),
@@ -36,6 +44,10 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe((recipe) => (this.recipe = recipe));
+
+    this.user
+      ? (this.isUserRecipeAuthor = +this.user.id === +this.recipe.authorId)
+      : null;
   }
 
   ngOnDestroy(): void {
@@ -50,5 +62,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     } else {
       this.renderer.addClass(liEl, 'line-through');
     }
+  }
+
+  handleAddShowCommentModal() {
+    this.showAddCommentModal = true;
   }
 }

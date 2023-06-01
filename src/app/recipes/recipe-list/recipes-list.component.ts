@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../../store/recipes/recipe.model';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
@@ -11,7 +11,7 @@ import { AppState } from 'src/app/store/app.reducer';
 })
 export class RecipesListComponent implements OnInit, OnDestroy {
   private recipesSub: Subscription;
-  recipes: Recipe[] = null;
+  recipes: Recipe[];
 
   constructor(private store: Store<AppState>) {}
 

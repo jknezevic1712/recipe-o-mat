@@ -2,9 +2,28 @@
   class="mx-auto mt-16 flex w-full flex-1 flex-col items-center justify-center bg-zinc-300 px-6 lg:px-8"
 >
   <div class="flex h-full w-full flex-col items-center justify-start py-4">
+    <div
+      class="flex w-full items-center justify-end pb-6"
+      *ngIf="!user && !isUserRecipeAuthor"
+    >
+      <a
+        [routerLink]="'../store/' + recipeIndex"
+        class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+      >
+        <div
+          class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+        ></div>
+        <button
+          type="button"
+          class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+        >
+          Edit Recipe
+        </button>
+      </a>
+    </div>
     <img
       [src]="recipe.imageUrl"
-      class="aspect-3/2 object-cover object-center shadow-xl"
+      class="aspect-3/2 rounded-sm object-cover object-center shadow-xl md:aspect-video"
     />
     <div
       class="mt-8 flex h-full w-full flex-col items-start justify-start gap-4 text-start text-zinc-900"
@@ -18,7 +37,7 @@
         {{ recipe.description }}
       </p>
       <div
-        class="flex w-full max-w-xl flex-col items-start justify-start border border-amber-500 p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+        class="flex w-full max-w-xl flex-col items-start justify-start p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
         *ngIf="recipe.ingredients"
       >
         <h2 class="pb-2 font-bold text-amber-500">Ingredients:</h2>
@@ -40,7 +59,7 @@
       </div>
 
       <div
-        class="flex w-full flex-col items-start justify-start border border-amber-500 p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+        class="flex w-full flex-col items-start justify-start p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
         *ngIf="recipe.steps"
       >
         <h2 class="pb-2 font-bold text-amber-500">Instructions:</h2>
@@ -57,6 +76,76 @@
             }}</span>
           </li>
         </ul>
+      </div>
+    </div>
+    <div class="my-8 w-full" *ngIf="!user">
+      <div
+        class="flex w-full flex-col items-center justify-between md:flex-row"
+      >
+        <span class="w-full md:max-w-[200px]">
+          <button
+            type="button"
+            class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+          >
+            <div
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+            ></div>
+            <span
+              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+            >
+              Like
+            </span>
+          </button>
+        </span>
+
+        <span class="w-full py-4 md:max-w-[200px] md:py-0">
+          <button
+            type="button"
+            class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+            (click)="handleAddShowCommentModal()"
+          >
+            <div
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+            ></div>
+            <span
+              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+            >
+              Comment
+            </span>
+          </button>
+        </span>
+
+        <span class="w-full md:max-w-[200px]">
+          <button
+            type="button"
+            class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+          >
+            <div
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+            ></div>
+            <span
+              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+            >
+              Share
+            </span>
+          </button>
+        </span>
+      </div>
+      <div
+        class="mt-8 flex w-full flex-col items-center justify-start p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+      >
+        <h2
+          class="w-full text-center text-xl font-bold italic text-amber-500 md:text-2xl xl:text-3xl"
+        >
+          Feedback
+        </h2>
+        <app-recipe-comment
+          class="w-full"
+          *ngFor="let comment of recipe.comments; index as idx; last as isLast"
+          [comment]="comment"
+          [commentIdx]="idx"
+          [isLastComment]="isLast"
+        ></app-recipe-comment>
       </div>
     </div>
   </div>
