@@ -4,7 +4,7 @@
   <div class="flex h-full w-full flex-col items-center justify-start py-4">
     <img
       [src]="recipe.imageUrl"
-      class="aspect-3/2 object-cover object-center"
+      class="aspect-3/2 object-cover object-center shadow-xl"
     />
     <div
       class="mt-8 flex h-full w-full flex-col items-start justify-start gap-4 text-start text-zinc-900"
@@ -24,12 +24,14 @@
         <h2 class="pb-2 font-bold text-amber-500">Ingredients:</h2>
         <ul class="w-full">
           <li
-            class="flex w-full items-start justify-between indent-4 italic"
+            class="my-2 flex w-full items-start justify-between indent-4 italic"
             *ngFor="let ingredient of recipe.ingredients; let index"
             #ingredientLiEl
             (click)="onCrossOff(ingredientLiEl)"
           >
-            <span class="w-1/2 text-start">{{ ingredient.name }}</span>
+            <span class="w-1/2 break-words text-start">{{
+              ingredient.name
+            }}</span>
             <span class="w-1/2 text-end">{{
               ingredient.amount + " " + ingredient.unit
             }}</span>
@@ -50,7 +52,9 @@
             (click)="onCrossOff(stepLiEl)"
           >
             <span class="w-full font-bold">Step {{ idx + 1 }}:</span>
-            <span class="ml-4 mt-4 w-full">{{ step["description"] }}</span>
+            <span class="mt-4 w-full break-words px-4 md:px-0 md:pl-16">{{
+              step["description"]
+            }}</span>
           </li>
         </ul>
       </div>

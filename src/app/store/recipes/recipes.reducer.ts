@@ -32,24 +32,30 @@ const initialState: RecipesState = {
       ],
     },
     {
-      name: 'Test',
-      description: 'Test description!',
+      name: 'Spaghetti Bolognese',
+      description:
+        'Delicious meal that can be done with just a few ingredients!',
       imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/6287520/pexels-photo-6287520.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       ingredients: [
         {
           name: 'Onions',
-          amount: '200',
+          amount: '100',
           unit: 'g',
         },
         {
           name: 'Tomatoes',
-          amount: '5',
+          amount: '3',
           unit: 'piece(s)',
         },
         {
-          name: 'Meat',
-          amount: '500',
+          name: 'Minced Meat',
+          amount: '350',
+          unit: 'g',
+        },
+        {
+          name: 'Parmesan',
+          amount: '100',
           unit: 'g',
         },
       ],
