@@ -6,13 +6,13 @@
       <button
         type="submit"
         form="recipeStoreFormSubmitRef"
-        [disabled]="recipeStoreForm.valid"
+        [disabled]="handleDisableSaveButton()"
         class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
       >
         <div
           class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
           [ngClass]="
-            recipeStoreForm.valid
+            !handleDisableSaveButton()
               ? 'bg-blue-500 group-hover:w-3'
               : 'bg-zinc-300'
           "
@@ -20,7 +20,7 @@
         <span
           class="relative transition-all md:text-lg xl:text-xl"
           [ngClass]="
-            recipeStoreForm.valid
+            !handleDisableSaveButton()
               ? 'text-zinc-100 group-hover:text-zinc-900'
               : 'text-zinc-900'
           "
@@ -53,7 +53,7 @@
               <input
                 type="text"
                 id="name"
-                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
                 formControlName="name"
               />
             </div>
@@ -72,13 +72,26 @@
             <div
               class="flex w-full items-center justify-between md:text-lg xl:text-xl"
             >
-              <label for="description" class="pr-4">Description</label>
+              <label for="imageUrl" class="pr-4">Image URL</label>
               <input
                 type="text"
-                id="description"
-                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
-                formControlName="description"
+                id="imageUrl"
+                class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
+                formControlName="imageUrl"
               />
+            </div>
+          </div>
+
+          <div class="flex w-full flex-col py-4">
+            <div
+              class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+            >
+              <label for="description" class="pr-4">Description</label>
+              <textarea
+                id="description"
+                class="min-h-[125px] w-full max-w-[200px] resize-y rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
+                formControlName="description"
+              ></textarea>
             </div>
             <span
               class="pt-4 text-rose-600"
@@ -89,20 +102,6 @@
             >
               Please enter recipe description!
             </span>
-          </div>
-
-          <div class="flex w-full flex-col py-4">
-            <div
-              class="flex w-full items-center justify-between md:text-lg xl:text-xl"
-            >
-              <label for="imageUrl" class="pr-4">Image URL</label>
-              <input
-                type="text"
-                id="imageUrl"
-                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
-                formControlName="imageUrl"
-              />
-            </div>
           </div>
 
           <div class="my-20 flex w-full flex-col" formArrayName="ingredients">
@@ -133,7 +132,7 @@
                 <input
                   id="name"
                   type="text"
-                  class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                  class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
                   formControlName="name"
                 />
               </div>
@@ -145,7 +144,7 @@
                 <input
                   id="amount"
                   type="number"
-                  class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                  class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
                   formControlName="amount"
                 />
               </div>
@@ -157,7 +156,7 @@
                 <select
                   id="unit"
                   formControlName="unit"
-                  class="w-full max-w-[210px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
+                  class="w-full max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
                 >
                   <option
                     value=""

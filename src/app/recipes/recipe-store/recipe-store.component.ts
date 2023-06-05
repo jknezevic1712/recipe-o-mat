@@ -170,6 +170,17 @@ export class RecipeStoreComponent {
     this.router.navigate(['/recipes/' + this.recipeIndex]);
   }
 
+  handleDisableSaveButton(): boolean {
+    if (this.isEditMode) {
+      return !this.recipeStoreForm.valid ||
+        (this.recipeStoreForm.valid && !this.recipeStoreForm.dirty)
+        ? true
+        : false;
+    } else {
+      return !this.recipeStoreForm.valid ? true : false;
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.routeSub) {
       this.routeSub.unsubscribe();
