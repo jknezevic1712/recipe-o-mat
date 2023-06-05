@@ -1,1 +1,27 @@
-<p>recipe-store works!</p>
+<div
+  class="mx-auto mt-16 flex w-full flex-1 flex-col items-center justify-center bg-zinc-300 px-6 lg:px-8"
+>
+  <div class="flex h-full w-full flex-col items-center justify-start py-4">
+    <div class="flex w-full items-center justify-end pb-6">
+      <a
+        [routerLink]="'/recipes/' + recipeIndex"
+        class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+      >
+        <div
+          class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+        ></div>
+        <button
+          type="button"
+          class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+        >
+          Save
+        </button>
+      </a>
+    </div>
+
+    <img
+      [src]="recipe.imageUrl"
+      class="aspect-3/2 rounded-sm object-cover object-center shadow-xl md:aspect-video"
+    />
+  </div>
+</div>

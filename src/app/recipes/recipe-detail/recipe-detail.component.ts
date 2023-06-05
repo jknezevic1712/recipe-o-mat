@@ -18,6 +18,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   user: User;
   isUserRecipeAuthor: boolean;
   showAddCommentModal: boolean;
+  isShareMenuOpen = false;
   private routeSub: Subscription;
 
   constructor(
@@ -37,7 +38,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         switchMap((id) => {
           this.recipeIndex = id;
 
-          return this.store.select('recipes', 'recipes');
+          return this.store.select('recipes', 'recipesList');
         }),
         map((recipeList) =>
           recipeList.find((recipe, idx) => idx === this.recipeIndex)
@@ -66,5 +67,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   handleAddShowCommentModal() {
     this.showAddCommentModal = true;
+  }
+
+  handleShowShareMenu() {
+    this.isShareMenuOpen = !this.isShareMenuOpen;
   }
 }

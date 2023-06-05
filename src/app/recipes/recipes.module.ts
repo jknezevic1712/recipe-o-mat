@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 import { RecipesComponent } from './recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
@@ -20,6 +22,12 @@ import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-co
     RecipeStoreComponent,
     RecipeCommentComponent,
   ],
-  imports: [CommonModule, RouterModule, RecipesRoutingModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RecipesRoutingModule,
+    ShareButtonsModule,
+    ShareIconsModule,
+  ],
 })
 export class RecipesModule {}

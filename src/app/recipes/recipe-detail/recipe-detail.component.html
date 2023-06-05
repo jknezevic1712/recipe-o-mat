@@ -119,6 +119,7 @@
           <button
             type="button"
             class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+            (click)="handleShowShareMenu()"
           >
             <div
               class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
@@ -130,9 +131,61 @@
             </span>
           </button>
         </span>
+        <!-- [include]="[
+            'facebook',
+            'twitter',
+            'linkedin',
+            'pinterest',
+            'reddit',
+            'tumblr',
+            'mix',
+            'viber',
+            'vk',
+            'telegram',
+            'messenger',
+            'whatsapp'
+          ]" -->
+      </div>
+      <div
+        class="flex w-full flex-wrap items-center justify-center gap-4 rounded-sm text-zinc-900 shadow-lg transition-all ease-in-out"
+        [ngClass]="
+          isShareMenuOpen
+            ? 'my-12 scale-100 pb-4 opacity-100'
+            : 'scale-0 opacity-0'
+        "
+      >
+        <share-button
+          class="w-fit rounded-sm bg-blue-600 transition-colors hover:bg-blue-700"
+          button="facebook"
+          [url]=""
+          text="Share"
+          [showText]="false"
+        />
+        <share-button
+          class="w-fit rounded-sm bg-sky-400 transition-colors hover:bg-sky-500"
+          button="twitter"
+          [url]=""
+          text="Tweet"
+          [showText]="false"
+        />
+        <share-button
+          class="w-fit rounded-sm bg-cyan-600 transition-colors hover:bg-cyan-700"
+          button="linkedin"
+          [url]=""
+          text="Share"
+          [showText]="false"
+        />
+        <share-button
+          class="w-fit rounded-sm bg-rose-600 transition-colors hover:bg-rose-700"
+          button="pinterest"
+          [url]=""
+          text="Pin"
+          [showText]="false"
+        />
       </div>
       <div
         class="mt-8 flex w-full flex-col items-center justify-start p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
+        *ngIf="recipe.comments"
       >
         <h2
           class="w-full text-center text-xl font-bold italic text-amber-500 md:text-2xl xl:text-3xl"

@@ -2,12 +2,12 @@ import { Recipe } from 'src/app/store/recipes/recipe.model';
 import { RECIPE_ACTIONS, RecipesActionTypes } from './recipes.actions';
 
 export interface RecipesState {
-  recipes: Recipe[];
+  recipesList: Recipe[];
   loading: boolean;
 }
 
 const initialState: RecipesState = {
-  recipes: [
+  recipesList: [
     {
       authorId: '1',
       name: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero qui aperiam aspernatur eveniet quia velit modi maiores earum rem voluptatum sapiente id repudiandae facere est labore assumenda, possimus dolores error consequatur neque? Distinctio, iste beatae! Minima hic nostrum animi, eaque ullam in velit enim dicta! Nemo nisi impedit excepturi dolor?',
@@ -336,7 +336,7 @@ export function recipesReducer(
       };
 
     case RECIPE_ACTIONS.ADD:
-      const modifiedRecipes = { ...state.recipes, ...action.payload };
+      const modifiedRecipes = { ...state.recipesList, ...action.payload };
 
       return {
         ...state,
@@ -345,11 +345,11 @@ export function recipesReducer(
 
     case RECIPE_ACTIONS.UPDATE:
       const updatedRecipe = {
-        ...state.recipes[action.payload.recipeIdx],
+        ...state.recipesList[action.payload.recipeIdx],
         ...action.payload.recipe,
       };
 
-      const updatedRecipes = [...state.recipes];
+      const updatedRecipes = [...state.recipesList];
       updatedRecipes[action.payload.recipeIdx] = updatedRecipe;
 
       return {
@@ -360,7 +360,9 @@ export function recipesReducer(
     case RECIPE_ACTIONS.DELETE:
       return {
         ...state,
-        recipes: state.recipes.filter((recipe, idx) => idx !== action.payload),
+        recipes: state.recipesList.filter(
+          (recipe, idx) => idx !== action.payload
+        ),
       };
 
     default:
