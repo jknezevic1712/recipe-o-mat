@@ -3,25 +3,310 @@
 >
   <div class="flex h-full w-full flex-col items-center justify-start py-4">
     <div class="flex w-full items-center justify-end pb-6">
-      <a
-        [routerLink]="'/recipes/' + recipeIndex"
+      <button
+        type="submit"
+        form="recipeStoreFormSubmitRef"
+        [disabled]="recipeStoreForm.valid"
         class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
       >
         <div
-          class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+          class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
+          [ngClass]="
+            recipeStoreForm.valid
+              ? 'bg-blue-500 group-hover:w-3'
+              : 'bg-zinc-300'
+          "
         ></div>
-        <button
-          type="button"
-          class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+        <span
+          class="relative transition-all md:text-lg xl:text-xl"
+          [ngClass]="
+            recipeStoreForm.valid
+              ? 'text-zinc-100 group-hover:text-zinc-900'
+              : 'text-zinc-900'
+          "
         >
           Save
-        </button>
-      </a>
+        </span>
+      </button>
     </div>
 
     <img
-      [src]="recipe.imageUrl"
+      [src]="recipeStoreForm.controls.imageUrl.value"
       class="aspect-3/2 rounded-sm object-cover object-center shadow-xl md:aspect-video"
     />
+
+    <div class="mt-6 flex w-full flex-col items-center justify-center">
+      <div
+        class="flex w-full max-w-md flex-col items-center justify-center rounded-sm p-4 text-center text-zinc-900 opacity-90 shadow-xl xl:max-w-xl 3xl:max-w-2xl 3xl:p-8"
+      >
+        <form
+          class="w-full"
+          id="recipeStoreFormSubmitRef"
+          [formGroup]="recipeStoreForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="flex w-full flex-col py-4">
+            <div
+              class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+            >
+              <label for="name" class="pr-4">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                formControlName="name"
+              />
+            </div>
+            <span
+              class="pt-4 text-rose-600"
+              *ngIf="
+                !recipeStoreForm.controls.name.valid &&
+                recipeStoreForm.controls.name.touched
+              "
+            >
+              Please enter recipe name!
+            </span>
+          </div>
+
+          <div class="flex w-full flex-col py-4">
+            <div
+              class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+            >
+              <label for="description" class="pr-4">Description</label>
+              <input
+                type="text"
+                id="description"
+                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                formControlName="description"
+              />
+            </div>
+            <span
+              class="pt-4 text-rose-600"
+              *ngIf="
+                !recipeStoreForm.controls.description.valid &&
+                recipeStoreForm.controls.description.touched
+              "
+            >
+              Please enter recipe description!
+            </span>
+          </div>
+
+          <div class="flex w-full flex-col py-4">
+            <div
+              class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+            >
+              <label for="imageUrl" class="pr-4">Image URL</label>
+              <input
+                type="text"
+                id="imageUrl"
+                class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                formControlName="imageUrl"
+              />
+            </div>
+          </div>
+
+          <div class="my-20 flex w-full flex-col" formArrayName="ingredients">
+            <h2
+              class="mb-4 w-full text-center text-2xl font-bold italic text-amber-500 md:text-3xl xl:text-4xl"
+            >
+              Ingredients
+            </h2>
+
+            <div
+              class="my-6 flex w-full flex-col items-center justify-between gap-8 md:text-lg xl:text-xl"
+              *ngFor="
+                let ingredientCtrl of ingredientControls;
+                index as idx;
+                first as isFirst
+              "
+              [formGroupName]="idx"
+            >
+              <h2
+                class="mb-4 w-full text-center text-lg font-bold italic text-zinc-900 md:text-xl xl:text-2xl"
+              >
+                Ingredient {{ idx + 1 }}
+              </h2>
+              <div
+                class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+              >
+                <label for="name" class="pr-4">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                  formControlName="name"
+                />
+              </div>
+
+              <div
+                class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+              >
+                <label for="amount" class="pr-4">Amount</label>
+                <input
+                  id="amount"
+                  type="number"
+                  class="rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                  formControlName="amount"
+                />
+              </div>
+
+              <div
+                class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+              >
+                <label for="unit" class="pr-4">Unit</label>
+                <select
+                  id="unit"
+                  formControlName="unit"
+                  class="w-full max-w-[210px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
+                >
+                  <option
+                    value=""
+                    [disabled]="true"
+                    class="bg-zinc-900 text-zinc-100"
+                  >
+                    Choose Unit
+                  </option>
+                  <option
+                    class="bg-zinc-100 text-zinc-900"
+                    *ngFor="let unit of unitTypes"
+                    [value]="unit"
+                  >
+                    {{ unit }}
+                  </option>
+                </select>
+              </div>
+
+              <span
+                class="pt-4 text-rose-600"
+                *ngIf="
+                  !recipeStoreForm.controls.ingredients.controls[idx].valid &&
+                  recipeStoreForm.controls.ingredients.controls[idx].touched
+                "
+              >
+                Please insert all ingredient information!
+              </span>
+
+              <div
+                class="flex w-full items-center justify-center"
+                *ngIf="!isFirst"
+              >
+                <button
+                  type="button"
+                  (click)="onDeleteIngredient(idx)"
+                  class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+                >
+                  <div
+                    class="absolute inset-0 w-full bg-rose-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+                  ></div>
+                  <span
+                    class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+                  >
+                    Delete Ingredient {{ idx + 1 }}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="my-4 flex w-full items-center justify-center">
+              <button
+                type="button"
+                (click)="onAddIngredient()"
+                class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+              >
+                <div
+                  class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+                ></div>
+                <span
+                  class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+                >
+                  Add Ingredient
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex w-full flex-col py-4" formArrayName="cookingSteps">
+            <h2
+              class="mb-4 w-full text-center text-2xl font-bold italic text-amber-500 md:text-3xl xl:text-4xl"
+            >
+              Cooking Steps
+            </h2>
+
+            <div
+              class="my-6 flex w-full flex-col items-center justify-between gap-4 md:text-lg xl:text-xl"
+              *ngFor="
+                let cookingStepsCtrl of cookingStepsControls;
+                index as idx;
+                first as isFirst
+              "
+              [formGroupName]="idx"
+            >
+              <div
+                class="flex w-full flex-col items-center justify-between md:text-lg xl:text-xl"
+              >
+                <h2
+                  class="mb-4 w-full text-center text-lg font-bold italic text-zinc-900 md:text-xl xl:text-2xl"
+                >
+                  Step {{ idx + 1 }}
+                </h2>
+                <textarea
+                  id="description"
+                  class="min-h-[125px] w-full resize-y rounded-sm bg-zinc-100 p-1 text-zinc-900"
+                  formControlName="description"
+                >
+                </textarea>
+              </div>
+
+              <span
+                class="pt-4 text-rose-600"
+                *ngIf="
+                  !recipeStoreForm.controls.cookingSteps.controls[idx].valid &&
+                  recipeStoreForm.controls.cookingSteps.controls[idx].touched
+                "
+              >
+                Please don't leave empty cooking step information!
+              </span>
+
+              <div
+                class="flex w-full items-center justify-center"
+                *ngIf="!isFirst"
+              >
+                <button
+                  type="button"
+                  (click)="onDeleteCookingStep(idx)"
+                  class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+                >
+                  <div
+                    class="absolute inset-0 w-full bg-rose-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+                  ></div>
+                  <span
+                    class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+                  >
+                    Delete Step {{ idx + 1 }}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="my-4 flex w-full items-center justify-center">
+              <button
+                type="button"
+                (click)="onAddCookingStep()"
+                class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+              >
+                <div
+                  class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+                ></div>
+                <span
+                  class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+                >
+                  Add Step
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

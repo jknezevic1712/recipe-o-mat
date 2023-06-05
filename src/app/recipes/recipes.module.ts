@@ -12,6 +12,7 @@ import { RecipesListComponent } from './recipe-list/recipes-list.component';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
 import { RecipeStoreComponent } from './recipe-store/recipe-store.component';
 import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-comment.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-co
     RecipesRoutingModule,
     ShareButtonsModule,
     ShareIconsModule,
+    ReactiveFormsModule,
   ],
 })
 export class RecipesModule {}

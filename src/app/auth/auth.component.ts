@@ -19,8 +19,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     password: FormControl<string>;
   }>;
 
-  constructor() {}
-
   ngOnInit(): void {
     this.initForm();
   }

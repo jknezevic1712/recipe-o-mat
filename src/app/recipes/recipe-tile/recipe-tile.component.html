@@ -3,7 +3,11 @@
   [routerLink]="'/recipes/' + recipeIndex"
 >
   <img
-    [src]="recipe.imageUrl"
+    [src]="
+      recipe.imageUrl
+        ? recipe.imageUrl
+        : '../../../assets/blank_image_placeholder.png'
+    "
     class="block aspect-video h-auto w-full max-w-full object-cover align-middle sm:aspect-2/1 lg:aspect-3/2"
   />
   <div

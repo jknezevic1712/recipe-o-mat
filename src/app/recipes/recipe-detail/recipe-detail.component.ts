@@ -20,6 +20,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   showAddCommentModal: boolean;
   isShareMenuOpen = false;
   private routeSub: Subscription;
+  blankImagePlaceholder = 'src/assets/blank_image_placeholder.png';
 
   constructor(
     private store: Store<AppState>,

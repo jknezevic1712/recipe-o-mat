@@ -60,13 +60,13 @@
 
       <div
         class="flex w-full flex-col items-start justify-start p-4 text-lg shadow-xl md:text-xl xl:text-2xl"
-        *ngIf="recipe.steps"
+        *ngIf="recipe.cookingSteps"
       >
         <h2 class="pb-2 font-bold text-amber-500">Instructions:</h2>
         <ul class="w-full">
           <li
             class="my-6 flex w-full flex-col items-start justify-start indent-4 italic"
-            *ngFor="let step of recipe.steps; index as idx"
+            *ngFor="let step of recipe.cookingSteps; index as idx"
             #stepLiEl
             (click)="onCrossOff(stepLiEl)"
           >

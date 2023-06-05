@@ -2,9 +2,9 @@ export interface Recipe {
   authorId: string;
   name: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
   ingredients?: Ingredient[];
-  steps?: Step[];
+  cookingSteps?: Step[];
   comments?: RecipeComment[];
   likes?: number;
 }
@@ -16,7 +16,7 @@ export interface Ingredient {
 }
 
 export interface Step {
-  [key: string]: string;
+  description: string;
 }
 
 export interface RecipeComment {

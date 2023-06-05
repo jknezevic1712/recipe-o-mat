@@ -61,7 +61,7 @@ const initialState: RecipesState = {
           unit: 'g',
         },
       ],
-      steps: [
+      cookingSteps: [
         {
           description:
             'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa deserunt natus nulla aut commodi enim quos vero soluta eaque id. Illum iure eligendi aut ipsum cum nobis. Consectetur, culpa id.',
@@ -132,8 +132,7 @@ const initialState: RecipesState = {
       authorId: '1',
       name: 'Test',
       description: 'Test description!',
-      imageUrl:
-        'https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      imageUrl: null,
       ingredients: [
         {
           name: 'Onion',
