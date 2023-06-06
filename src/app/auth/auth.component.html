@@ -63,9 +63,9 @@
         </div>
 
         <div
-          class="flex w-full max-w-md flex-wrap items-center justify-center md:flex-nowrap md:gap-4 xl:max-w-xl 3xl:max-w-2xl"
+          class="mt-8 flex w-full max-w-md flex-wrap items-center justify-center md:flex-nowrap md:gap-4 xl:max-w-xl 3xl:max-w-2xl"
         >
-          <span class="w-full pt-6 md:pt-0">
+          <span class="w-full">
             <button
               type="submit"
               [disabled]="!signInForm.valid"
@@ -92,7 +92,7 @@
             </button>
           </span>
 
-          <span class="w-full pt-3 md:pt-0">
+          <span class="mt-3 w-full md:mt-0">
             <button
               type="button"
               (click)="handleGoogleSignIn()"
@@ -207,13 +207,13 @@
           </div>
 
           <div
-            class="flex w-full max-w-md flex-wrap items-center justify-center md:flex-nowrap md:gap-4 xl:max-w-xl 3xl:max-w-2xl"
+            class="mt-8 flex w-full max-w-md items-center justify-center xl:max-w-xl 3xl:max-w-2xl"
           >
-            <span class="w-full pt-6 md:pt-0">
+            <span class="flex w-full items-center justify-center md:pt-0">
               <button
                 type="submit"
                 [disabled]="!signUpForm.valid"
-                class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
+                class="group relative w-full overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
               >
                 <div
                   class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
@@ -232,22 +232,6 @@
                   "
                 >
                   {{ isSignUpMode ? "Sign Up" : "Sign In" }}
-                </span>
-              </button>
-            </span>
-
-            <span class="w-full pt-3 md:pt-0">
-              <button
-                type="button"
-                class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
-              >
-                <div
-                  class="absolute inset-0 w-full bg-emerald-500 transition-all duration-[250ms] ease-out group-hover:w-3"
-                ></div>
-                <span
-                  class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
-                >
-                  Google
                 </span>
               </button>
             </span>
