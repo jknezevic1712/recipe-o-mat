@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from './auth.service';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -18,6 +20,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     email: FormControl<string>;
     password: FormControl<string>;
   }>;
+
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -60,4 +64,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.isSignUpMode = !this.isSignUpMode;
     this.initForm();
   }
+
+  handleGoogleSignIn() {
+    this.authService.GoogleAuth();
+  }
+
+  handleSignOut() {}
 }

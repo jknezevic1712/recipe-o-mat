@@ -4,6 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -14,7 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 
 import { appReducer } from './store/app.reducer';
-import { environment } from './environments/environment';
+import { environment } from 'src/environments/environment';
 import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
@@ -35,6 +39,9 @@ import { ButtonComponent } from './shared/button/button.component';
       logOnly: environment.production,
     }),
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
   bootstrap: [AppComponent],
 })
