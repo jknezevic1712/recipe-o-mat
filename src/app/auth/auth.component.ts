@@ -66,7 +66,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   handleGoogleSignIn() {
-    this.authService.GoogleAuth();
+    this.authService.googleAuth();
   }
 
   handleSignOut() {}

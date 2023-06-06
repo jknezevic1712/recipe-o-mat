@@ -71,8 +71,7 @@
           >Profile</a
         >
         <hr class="mx-auto my-5 w-4/5 border-t-[1px] border-amber-500" />
-        <a
-          [routerLink]="!user ? '/auth' : ''"
+        <button
           class="block px-4 py-3 text-sm text-zinc-100"
           [ngClass]="
             !user
@@ -80,8 +79,10 @@
               : 'bg-rose-500 hover:bg-rose-600'
           "
           tabindex="-1"
-          >{{ user ? "Sign Out" : "Sign In" }}</a
+          (click)="handleAuth()"
         >
+          {{ user ? "Sign Out" : "Sign In" }}
+        </button>
       </div>
     </button>
   </div>
@@ -112,15 +113,16 @@
       >Profile</a
     >
     <hr class="mx-3 my-auto h-8 w-[1px] bg-amber-500" />
-    <a
-      [routerLink]="!user ? '/auth' : ''"
+    <button
       class="rounded-sm border-b border-b-transparent px-4 py-2 text-sm text-zinc-100"
       [ngClass]="
         !user
           ? 'bg-blue-500 hover:bg-blue-600'
           : 'bg-rose-500 hover:bg-rose-600'
       "
-      >{{ user ? "Sign Out" : "Sign In" }}</a
+      (click)="handleAuth()"
     >
+      {{ user ? "Sign Out" : "Sign In" }}
+    </button>
   </div>
 </header>

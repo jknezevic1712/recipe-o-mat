@@ -5,12 +5,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
+import { Logout } from '../store/auth/auth.actions';
+
+import { Subscription } from 'rxjs';
 
 import { User } from '../store/auth/auth.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +30,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('navButtonElement', { static: false })
   navButtonElementRef!: ElementRef;
 
-  constructor(private _elRef: ElementRef, private store: Store<AppState>) {}
+  constructor(
+    private _elRef: ElementRef,
+    private store: Store<AppState>,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.userSub = this.store.select('auth', 'user').subscribe((userData) => {
@@ -62,6 +69,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
     ) {
       this.isMenuOpen = false;
+    }
+  }
+
+  handleAuth() {
+    if (this.user) {
+      this.store.dispatch(new Logout());
+    } else {
+      this.router.navigate(['/auth']);
     }
   }
 }

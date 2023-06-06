@@ -4,7 +4,7 @@
   <div class="flex h-full w-full flex-col items-center justify-start py-4">
     <div
       class="flex w-full items-center justify-end pb-6"
-      *ngIf="!user && !isUserRecipeAuthor"
+      *ngIf="user && isUserRecipeAuthor"
     >
       <a
         [routerLink]="'../store/' + recipeIndex"
@@ -78,7 +78,7 @@
         </ul>
       </div>
     </div>
-    <div class="my-8 w-full" *ngIf="!user">
+    <div class="my-8 w-full" *ngIf="user">
       <div
         class="flex w-full flex-col items-center justify-between md:flex-row"
       >

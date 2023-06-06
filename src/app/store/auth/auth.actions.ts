@@ -15,9 +15,11 @@ export class AuthSuccess implements Action {
 
   constructor(
     public payload: {
-      email: string;
       userId: string;
-      redirect: boolean;
+      email: string;
+      fullName: string;
+      photoURL: string;
+      idToken: string;
     }
   ) {}
 }

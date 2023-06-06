@@ -1,6 +1,6 @@
 import { User } from './auth.model';
 
-import { AUTH_ACTIONS, AuthActionTypes } from './auth.actions';
+import { AUTH_ACTIONS, AuthActionTypes, AuthSuccess } from './auth.actions';
 
 export interface AuthState {
   user: User | null;
@@ -26,8 +26,10 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
       };
 
     case AUTH_ACTIONS.AUTH_SUCCESS:
-      const { userId, email } = action.payload;
-      const user = new User(userId, email, 'Jakov', 'Knezevic');
+      const { userId, email, fullName, photoURL, idToken } = action.payload;
+      const user = new User(userId, email, fullName, photoURL, idToken);
+
+      localStorage.setItem('userData', JSON.stringify(user));
 
       return {
         ...state,
@@ -45,6 +47,8 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
       };
 
     case AUTH_ACTIONS.LOGOUT:
+      localStorage.removeItem('userData');
+
       return {
         ...state,
         user: null,
@@ -55,6 +59,13 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
     case AUTH_ACTIONS.CLEAR_ERROR:
       return {
         ...state,
+        authError: null,
+      };
+
+    case AUTH_ACTIONS.AUTO_LOGIN:
+      return {
+        ...state,
+        loading: false,
         authError: null,
       };
 
