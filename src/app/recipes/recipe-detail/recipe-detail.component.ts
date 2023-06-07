@@ -48,7 +48,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       .subscribe((recipe) => (this.recipe = recipe));
 
     this.user
-      ? (this.isUserRecipeAuthor = +this.user.id === +this.recipe.authorId)
+      ? (this.isUserRecipeAuthor = this.user.id === this.recipe.authorId)
       : null;
   }
 
