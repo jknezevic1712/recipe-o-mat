@@ -1,29 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-// import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-// import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
-import {
-  AUTH_ACTIONS,
-  AuthFail,
-  AuthSuccess,
-} from '../store/auth/auth.actions';
+import { AUTH_ACTIONS, AuthFail, AuthSuccess } from './auth.actions';
 
-import { User } from '../store/auth/auth.model';
-
-// import { environment } from 'src/environments/environment';
-// import { FirestoreDBService } from 'src/firestore/firestore.service';
+import { User } from './auth.model';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private actions$: Actions,
-    // private firestoreDbService: FirestoreDBService,
-    private router: Router
-  ) {}
+  constructor(private actions$: Actions, private router: Router) {}
 
   autoLogin = createEffect(() =>
     this.actions$.pipe(

@@ -4,7 +4,7 @@ import { Recipe } from 'src/app/store/recipes/recipe.model';
 
 export enum RECIPE_ACTIONS {
   FETCH_ALL = 'FETCH_ALL',
-  SAVE_ALL = 'SAVE_ALL',
+  SAVE_FETCHED_RECIPES = 'SAVE_FETCHED_RECIPES',
   REFRESH_RECIPES = 'REFRESH_RECIPES',
   ADD = 'ADD',
   UPDATE = 'UPDATE',
@@ -15,8 +15,10 @@ export class FetchAllRecipes implements Action {
   readonly type = RECIPE_ACTIONS.FETCH_ALL;
 }
 
-export class SaveAllRecipes implements Action {
-  readonly type = RECIPE_ACTIONS.SAVE_ALL;
+export class SaveFetchedRecipes implements Action {
+  readonly type = RECIPE_ACTIONS.SAVE_FETCHED_RECIPES;
+
+  constructor(public payload: Recipe[]) {}
 }
 
 export class RefreshRecipes implements Action {
@@ -50,7 +52,7 @@ export class DeleteRecipe implements Action {
 
 export type RecipesActionTypes =
   | FetchAllRecipes
-  | SaveAllRecipes
+  | SaveFetchedRecipes
   | RefreshRecipes
   | AddRecipe
   | UpdateRecipe

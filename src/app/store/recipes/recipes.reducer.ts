@@ -384,6 +384,26 @@ export function recipesReducer(
         ),
       };
 
+    case RECIPE_ACTIONS.FETCH_ALL:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case RECIPE_ACTIONS.SAVE_FETCHED_RECIPES:
+      const fetchedRecipesPayload = { ...action.payload };
+
+      let sortedRecipesList: Recipe[] = [];
+      Object.values(fetchedRecipesPayload).map((recipesList: Recipe) =>
+        sortedRecipesList.push(recipesList)
+      );
+
+      return {
+        ...state,
+        recipesList: sortedRecipesList,
+        loading: false,
+      };
+
     default:
       return state;
   }

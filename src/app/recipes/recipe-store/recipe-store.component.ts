@@ -32,7 +32,15 @@ export class RecipeStoreComponent {
   private storeSub: Subscription;
   private userSub: Subscription;
 
-  unitTypes = ['g', 'kg', 'ml', 'l', 'piece(s)'];
+  unitTypes = [
+    'g',
+    'kg',
+    'ml',
+    'l',
+    'piece(s)',
+    'tablespoon(s)',
+    'teaspoon(s)',
+  ];
 
   constructor(
     private store: Store<AppState>,
@@ -210,6 +218,10 @@ export class RecipeStoreComponent {
 
     if (this.storeSub) {
       this.storeSub.unsubscribe();
+    }
+
+    if (this.userSub) {
+      this.userSub.unsubscribe();
     }
   }
 }
