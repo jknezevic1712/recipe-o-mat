@@ -1,6 +1,6 @@
-import { User } from './auth.model';
+import { AUTH_ACTIONS, AuthActionTypes } from './auth.actions';
 
-import { AUTH_ACTIONS, AuthActionTypes, AuthSuccess } from './auth.actions';
+import { User } from './auth.model';
 
 export interface AuthState {
   user: User | null;

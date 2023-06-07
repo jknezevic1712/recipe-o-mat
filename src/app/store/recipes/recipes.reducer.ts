@@ -10,6 +10,8 @@ const initialState: RecipesState = {
   recipesList: [
     {
       authorId: '1',
+      authorName: 'User 1',
+      authorPhotoUrl: '',
       name: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero qui aperiam aspernatur eveniet quia velit modi maiores earum rem voluptatum sapiente id repudiandae facere est labore assumenda, possimus dolores error consequatur neque? Distinctio, iste beatae! Minima hic nostrum animi, eaque ullam in velit enim dicta! Nemo nisi impedit excepturi dolor?',
       description: 'Test description!',
       imageUrl:
@@ -34,6 +36,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 2',
+      authorPhotoUrl: '',
       name: 'Spaghetti Bolognese',
       description:
         'Delicious meal that can be done with just a few ingredients!',
@@ -130,6 +134,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 3',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl: null,
@@ -153,6 +159,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 4',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -177,6 +185,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 5',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -201,6 +211,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 1',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -225,6 +237,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 1',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -249,6 +263,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 3',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -273,6 +289,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 4',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:
@@ -297,6 +315,8 @@ const initialState: RecipesState = {
     },
     {
       authorId: '1',
+      authorName: 'User 4',
+      authorPhotoUrl: '',
       name: 'Test',
       description: 'Test description!',
       imageUrl:

@@ -1,5 +1,7 @@
 export interface Recipe {
   authorId: string;
+  authorName: string;
+  authorPhotoUrl: string;
   name: string;
   description: string;
   imageUrl?: string;

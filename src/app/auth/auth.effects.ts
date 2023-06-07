@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { of } from 'rxjs';
+// import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import {
@@ -14,10 +14,17 @@ import {
 
 import { User } from '../store/auth/auth.model';
 
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
+// import { FirestoreDBService } from 'src/firestore/firestore.service';
 
 @Injectable()
 export class AuthEffects {
+  constructor(
+    private actions$: Actions,
+    // private firestoreDbService: FirestoreDBService,
+    private router: Router
+  ) {}
+
   autoLogin = createEffect(() =>
     this.actions$.pipe(
       ofType(AUTH_ACTIONS.AUTO_LOGIN),
@@ -188,10 +195,4 @@ export class AuthEffects {
   //     dispatch: false,
   //   }
   // );
-
-  constructor(
-    private actions$: Actions,
-    // private http: HttpClient,
-    private router: Router // private authService: AuthService
-  ) {}
 }

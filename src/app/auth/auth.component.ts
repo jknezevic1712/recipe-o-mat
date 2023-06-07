@@ -60,7 +60,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     console.log('SUBMITTED!');
   }
 
-  onSignUpHandler() {
+  handleAuthType() {
     this.isSignUpMode = !this.isSignUpMode;
     this.initForm();
   }

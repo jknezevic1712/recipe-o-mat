@@ -3,9 +3,11 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription, map } from 'rxjs';
+import { FirestoreDBService } from 'src/firestore/firestore.service';
 
 import { AppState } from 'src/app/store/app.reducer';
 import { Recipe } from 'src/app/store/recipes/recipe.model';
+import { User } from 'src/app/store/auth/auth.model';
 
 @Component({
   selector: 'app-recipe-store',
@@ -13,6 +15,7 @@ import { Recipe } from 'src/app/store/recipes/recipe.model';
   styles: [':host { width: 100%; height: 100%; display: flex; }'],
 })
 export class RecipeStoreComponent {
+  user: User;
   recipe: Recipe;
   recipeIndex: number | null;
 
@@ -27,13 +30,15 @@ export class RecipeStoreComponent {
 
   private routeSub: Subscription;
   private storeSub: Subscription;
+  private userSub: Subscription;
 
   unitTypes = ['g', 'kg', 'ml', 'l', 'piece(s)'];
 
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private firestoreDbService: FirestoreDBService
   ) {}
 
   ngOnInit() {
@@ -43,6 +48,10 @@ export class RecipeStoreComponent {
 
       this.initForm();
     });
+
+    this.userSub = this.store
+      .select('auth', 'user')
+      .subscribe((user) => (this.user = user));
   }
 
   private initForm() {
@@ -167,7 +176,20 @@ export class RecipeStoreComponent {
   }
 
   onSubmit() {
-    this.router.navigate(['/recipes/' + this.recipeIndex]);
+    const recipeWithAuthorId = {
+      ...this.recipeStoreForm.value,
+      authorId: this.user.id,
+      authorName: this.user.fullName,
+      authorPhotoUrl: this.user.photoURL,
+    };
+
+    this.firestoreDbService.createRecipe(recipeWithAuthorId as Recipe);
+
+    if (this.isEditMode) {
+      return this.router.navigate(['/recipes/' + this.recipeIndex]);
+    }
+
+    return this.router.navigate(['/recipes']);
   }
 
   handleDisableSaveButton(): boolean {
