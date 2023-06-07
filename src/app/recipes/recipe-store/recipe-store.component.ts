@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Subscription, map } from 'rxjs';
 import { FirestoreDBService } from 'src/firestore/firestore.service';
 
+import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
+
+import { UpdateRecipe } from 'src/app/store/recipes/recipes.actions';
+
 import { Recipe } from 'src/app/store/recipes/recipe.model';
 import { User } from 'src/app/store/auth/auth.model';
 
@@ -78,6 +81,7 @@ export class RecipeStoreComponent {
           )
         )
         .subscribe((recipe) => {
+          this.recipe = recipe;
           name = recipe.name;
           description = recipe.description;
           imageUrl = recipe.imageUrl ? recipe.imageUrl : '';
@@ -191,11 +195,14 @@ export class RecipeStoreComponent {
       authorPhotoUrl: this.user.photoURL,
     };
 
-    this.firestoreDbService.createRecipe(recipeWithAuthorId as Recipe);
-
     if (this.isEditMode) {
+      const recipeToUpdate = { ...recipeWithAuthorId, id: this.recipe.id };
+      this.store.dispatch(new UpdateRecipe(recipeToUpdate as Recipe));
+
       return this.router.navigate(['/recipes/' + this.recipeIndex]);
     }
+
+    this.firestoreDbService.createRecipe(recipeWithAuthorId as Recipe);
 
     return this.router.navigate(['/recipes']);
   }

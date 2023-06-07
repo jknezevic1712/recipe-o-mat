@@ -9,6 +9,7 @@ export interface RecipesState {
 const initialState: RecipesState = {
   recipesList: [
     {
+      id: '1',
       authorId: '1',
       authorName: 'User 1',
       authorPhotoUrl: '',
@@ -35,6 +36,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '2',
       authorId: '1',
       authorName: 'User 2',
       authorPhotoUrl: '',
@@ -133,6 +135,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '3',
       authorId: '1',
       authorName: 'User 3',
       authorPhotoUrl: '',
@@ -158,6 +161,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '4',
       authorId: '1',
       authorName: 'User 4',
       authorPhotoUrl: '',
@@ -184,6 +188,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '5',
       authorId: '1',
       authorName: 'User 5',
       authorPhotoUrl: '',
@@ -210,6 +215,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '6',
       authorId: '1',
       authorName: 'User 1',
       authorPhotoUrl: '',
@@ -236,6 +242,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '7',
       authorId: '1',
       authorName: 'User 1',
       authorPhotoUrl: '',
@@ -262,6 +269,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '8',
       authorId: '1',
       authorName: 'User 3',
       authorPhotoUrl: '',
@@ -288,6 +296,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '9',
       authorId: '1',
       authorName: 'User 4',
       authorPhotoUrl: '',
@@ -314,6 +323,7 @@ const initialState: RecipesState = {
       ],
     },
     {
+      id: '10',
       authorId: '1',
       authorName: 'User 4',
       authorPhotoUrl: '',
@@ -363,17 +373,17 @@ export function recipesReducer(
       };
 
     case RECIPE_ACTIONS.UPDATE:
-      const updatedRecipe = {
-        ...state.recipesList[action.payload.recipeIdx],
-        ...action.payload.recipe,
-      };
+      // const updatedRecipe = {
+      //   ...state.recipesList[action.payload.recipeIdx],
+      //   ...action.payload.recipe,
+      // };
 
-      const updatedRecipes = [...state.recipesList];
-      updatedRecipes[action.payload.recipeIdx] = updatedRecipe;
+      // const updatedRecipes = [...state.recipesList];
+      // updatedRecipes[action.payload.recipeIdx] = updatedRecipe;
 
       return {
         ...state,
-        recipes: updatedRecipes,
+        // recipes: updatedRecipes,
       };
 
     case RECIPE_ACTIONS.DELETE:

@@ -32,9 +32,7 @@ export class FirestoreDBService {
   }
 
   updateRecipe(recipe: Recipe) {
-    const recipeObj = { ...recipe };
-
-    return this.firestore.doc('recipes/' + recipe).update(recipeObj);
+    return this.firestore.doc('recipes/' + recipe.id).update(recipe);
   }
 
   deleteRecipe(recipeId: string) {
