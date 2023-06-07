@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
-import { FirestoreDBService } from 'src/firestore/firestore.service';
 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 
-import { UpdateRecipe } from 'src/app/store/recipes/recipes.actions';
+import { AddRecipe, UpdateRecipe } from 'src/app/store/recipes/recipes.actions';
 
 import { Recipe } from 'src/app/store/recipes/recipe.model';
 import { User } from 'src/app/store/auth/auth.model';
@@ -48,8 +47,7 @@ export class RecipeStoreComponent {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router,
-    private firestoreDbService: FirestoreDBService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -202,7 +200,7 @@ export class RecipeStoreComponent {
       return this.router.navigate(['/recipes/' + this.recipeIndex]);
     }
 
-    this.firestoreDbService.createRecipe(recipeWithAuthorId as Recipe);
+    this.store.dispatch(new AddRecipe(recipeWithAuthorId as Recipe));
 
     return this.router.navigate(['/recipes']);
   }

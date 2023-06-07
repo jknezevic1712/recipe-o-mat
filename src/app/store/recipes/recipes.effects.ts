@@ -7,13 +7,15 @@ import {
   collection,
   updateDoc,
   doc,
+  setDoc,
   DocumentReference,
 } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import {
+  type AddRecipe,
   FetchAllRecipes,
   RECIPE_ACTIONS,
-  RecipesActionTypes,
   SaveFetchedRecipes,
   type UpdateRecipe,
 } from './recipes.actions';
@@ -22,7 +24,6 @@ import { Observable, map, switchMap, takeUntil } from 'rxjs';
 import { RecipesService } from 'src/app/recipes/recipes.service';
 
 import { Recipe } from './recipe.model';
-import { Action } from '@ngrx/store';
 
 @Injectable()
 export class RecipesEffects {
@@ -30,16 +31,17 @@ export class RecipesEffects {
 
   constructor(
     private actions$: Actions,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private firestore: AngularFirestore
   ) {}
 
   fetchRecipes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(RECIPE_ACTIONS.FETCH_ALL),
       switchMap(() => {
-        const recipesCollection = collection(this.firestoreDb, 'recipes');
+        const recipesCollectionRef = collection(this.firestoreDb, 'recipes');
 
-        return collectionData(recipesCollection).pipe(
+        return collectionData(recipesCollectionRef).pipe(
           takeUntil(this.recipesService.unsubscribe$)
         ) as Observable<Recipe[]>;
       }),
@@ -47,13 +49,33 @@ export class RecipesEffects {
     )
   );
 
+  createRecipe$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(RECIPE_ACTIONS.ADD),
+        switchMap((actionData: AddRecipe) => {
+          const recipesCollectionRef = collection(this.firestoreDb, 'recipes');
+          const customRecipeId = this.firestore.createId();
+
+          const structuredRecipe = {
+            ...actionData.payload,
+            id: customRecipeId,
+          };
+
+          return setDoc(
+            doc(recipesCollectionRef, customRecipeId),
+            structuredRecipe
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   updateRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(RECIPE_ACTIONS.UPDATE),
       switchMap((actionData: UpdateRecipe) => {
         const updatedRecipe = actionData.payload;
-        console.log('UPDATED RECIPE ', actionData.payload);
-        console.log('updatedRecipe.id ', updatedRecipe.id);
 
         const recipeDocRef = doc(
           this.firestoreDb,
