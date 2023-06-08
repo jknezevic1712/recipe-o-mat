@@ -9,6 +9,7 @@ import {
   doc,
   setDoc,
   DocumentReference,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -18,6 +19,7 @@ import {
   RECIPE_ACTIONS,
   SaveFetchedRecipes,
   type UpdateRecipe,
+  DeleteRecipe,
 } from './recipes.actions';
 import { Observable, map, switchMap, takeUntil } from 'rxjs';
 
@@ -83,6 +85,23 @@ export class RecipesEffects {
         ) as DocumentReference<Recipe>;
 
         return updateDoc(recipeDocRef, updatedRecipe);
+      }),
+      map(() => new FetchAllRecipes())
+    )
+  );
+
+  deleteRecipe$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RECIPE_ACTIONS.DELETE),
+      switchMap((actionData: DeleteRecipe) => {
+        const recipeId = actionData.payload;
+
+        const recipeDocRef = doc(
+          this.firestoreDb,
+          'recipes/' + recipeId
+        ) as DocumentReference<Recipe>;
+
+        return deleteDoc(recipeDocRef);
       }),
       map(() => new FetchAllRecipes())
     )

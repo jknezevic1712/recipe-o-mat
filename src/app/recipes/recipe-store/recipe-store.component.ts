@@ -6,7 +6,11 @@ import { Subscription, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 
-import { AddRecipe, UpdateRecipe } from 'src/app/store/recipes/recipes.actions';
+import {
+  AddRecipe,
+  DeleteRecipe,
+  UpdateRecipe,
+} from 'src/app/store/recipes/recipes.actions';
 
 import { Recipe } from 'src/app/store/recipes/recipe.model';
 import { User } from 'src/app/store/auth/auth.model';
@@ -80,6 +84,7 @@ export class RecipeStoreComponent {
         )
         .subscribe((recipe) => {
           this.recipe = recipe;
+
           name = recipe.name;
           description = recipe.description;
           imageUrl = recipe.imageUrl ? recipe.imageUrl : '';
@@ -214,6 +219,12 @@ export class RecipeStoreComponent {
     } else {
       return !this.recipeStoreForm.valid ? true : false;
     }
+  }
+
+  handleDeleteRecipe() {
+    this.store.dispatch(new DeleteRecipe(this.recipe.id));
+
+    return this.router.navigate(['/recipes']);
   }
 
   ngOnDestroy(): void {

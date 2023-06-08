@@ -42,7 +42,7 @@ export class UpdateRecipe implements Action {
 export class DeleteRecipe implements Action {
   readonly type = RECIPE_ACTIONS.DELETE;
 
-  constructor(public payload: number) {}
+  constructor(public payload: string) {}
 }
 
 export type RecipesActionTypes =
