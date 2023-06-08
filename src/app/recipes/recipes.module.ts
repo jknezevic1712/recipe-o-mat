@@ -14,6 +14,7 @@ import { RecipeTileComponent } from './recipe-list/recipe-tile/recipe-tile.compo
 import { RecipeStoreComponent } from './recipe-store/recipe-store.component';
 import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-comment.component';
 import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { ScrollToTopComponent } from '../shared/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinn
     RecipeStoreComponent,
     RecipeCommentComponent,
     LoadingSpinnerComponent,
+    ScrollToTopComponent,
   ],
   imports: [
     CommonModule,
