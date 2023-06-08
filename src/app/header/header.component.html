@@ -3,6 +3,7 @@
   (keydown)="handleKeyboardMenuClose($event)"
 >
   <a routerLink="" class="font-bold italic 2xl:text-2xl">Recipe-O-Mat</a>
+  <!-- Mobile Menu -->
   <div class="h-8 md:hidden">
     <button
       type="button"
@@ -72,7 +73,7 @@
         >
         <hr class="mx-auto my-5 w-4/5 border-t-[1px] border-amber-500" />
         <button
-          class="block px-4 py-3 text-sm text-zinc-100"
+          class="block w-full px-4 py-3 text-sm text-zinc-100"
           [ngClass]="
             !user
               ? 'bg-blue-500 hover:bg-blue-600'
@@ -86,6 +87,8 @@
       </div>
     </button>
   </div>
+
+  <!-- Desktop Menu -->
   <div class="hidden md:flex">
     <a
       routerLinkActive="bg-zinc-300"
