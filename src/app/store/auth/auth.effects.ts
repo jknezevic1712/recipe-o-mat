@@ -33,14 +33,7 @@ import { from } from 'rxjs';
 export class AuthEffects {
   // firestoreDb: Firestore = inject(Firestore);
   // private auth: Auth = inject(Auth);
-
-  currentUser = this.auth.currentUser;
-  // private userSub$ = user(this.auth)
-  //   .pipe(
-  //     take(1),
-  //     map((user) => user)
-  //   )
-  //   .subscribe((user) => (this.currentUser = user));
+  updatedUser: User;
 
   constructor(
     private actions$: Actions,
@@ -125,10 +118,10 @@ export class AuthEffects {
       map(
         () =>
           new AuthSuccess({
-            userId: this.currentUser.uid,
-            email: this.currentUser.email,
-            fullName: this.currentUser.displayName,
-            photoURL: this.currentUser.photoURL,
+            userId: this.auth.currentUser.uid,
+            email: this.auth.currentUser.email,
+            fullName: this.auth.currentUser.displayName,
+            photoURL: this.auth.currentUser.photoURL,
             redirect: true,
           })
       )
@@ -175,42 +168,21 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AUTH_ACTIONS.FETCH_USER_DATA),
       switchMap(async () => {
-        // this.store.dispatch(new StartUserRefresh());
-
         new StartUserRefresh();
 
-        let updatedUser: User;
+        return this.auth.currentUser.reload().then(() => {
+          const { displayName, email, photoURL, uid } = this.auth.currentUser;
 
-        return from(
-          this.currentUser
-            .reload()
-            .then(() => {
-              const { displayName, email, photoURL, uid } = this.currentUser;
-
-              updatedUser = {
-                id: uid,
-                fullName: displayName,
-                email,
-                photoURL,
-              };
-            })
-            .then(() => {
-              console.log('updatedUser ', updatedUser);
-
-              return updatedUser;
-            })
-        );
-      }),
-      map((updatedUser) => {
-        let newUser: User;
-
-        updatedUser.subscribe((user) => {
-          console.log('user ', user);
-          return (newUser = user);
+          this.updatedUser = {
+            id: uid,
+            fullName: displayName,
+            email,
+            photoURL,
+          };
         });
-
-        return new RefreshUserData(newUser);
-        // return new RefreshUserData(newUser);
+      }),
+      map(() => {
+        return new RefreshUserData(this.updatedUser);
       })
     )
   );
@@ -218,12 +190,14 @@ export class AuthEffects {
   refreshUserData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AUTH_ACTIONS.REFRESH_USER_DATA),
-      map((userData: User) => {
+      map((userData: RefreshUserData) => {
+        const { id: userId, email, fullName, photoURL } = userData.payload;
+
         return new AuthSuccess({
-          userId: userData.id,
-          email: userData.email,
-          fullName: userData.fullName,
-          photoURL: userData.photoURL,
+          userId,
+          email,
+          fullName,
+          photoURL,
           redirect: false,
         });
       })
