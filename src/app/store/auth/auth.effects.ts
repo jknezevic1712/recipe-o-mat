@@ -12,7 +12,7 @@ import { User } from './auth.model';
 export class AuthEffects {
   constructor(private actions$: Actions, private router: Router) {}
 
-  autoLogin = createEffect(() =>
+  autoLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AUTH_ACTIONS.AUTO_LOGIN),
       map(() => {
@@ -28,17 +28,20 @@ export class AuthEffects {
           fullName: userData.fullName,
           photoURL: userData.photoURL,
           idToken: userData.idToken || '',
+          redirect: true,
         });
       })
     )
   );
 
-  authRedirect = createEffect(
+  authRedirect$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AUTH_ACTIONS.AUTH_SUCCESS),
-        tap(() => {
-          this.router.navigate(['/']);
+        tap((data: AuthSuccess) => {
+          if (data.payload.redirect) {
+            this.router.navigate(['/']);
+          }
         })
       ),
     {

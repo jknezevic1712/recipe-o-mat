@@ -8,6 +8,7 @@ export enum AUTH_ACTIONS {
   SIGNUP_START = 'SIGNUP_START',
   CLEAR_ERROR = 'CLEAR_ERROR',
   AUTO_LOGIN = 'AUTO_LOGIN',
+  REFRESH_USER = 'REFRESH_USER',
 }
 
 export class AuthSuccess implements Action {
@@ -20,6 +21,7 @@ export class AuthSuccess implements Action {
       fullName: string;
       photoURL: string;
       idToken: string;
+      redirect: boolean;
     }
   ) {}
 }
@@ -64,6 +66,10 @@ export class AutoLogin implements Action {
   readonly type = AUTH_ACTIONS.AUTO_LOGIN;
 }
 
+export class RefreshUser implements Action {
+  readonly type = AUTH_ACTIONS.REFRESH_USER;
+}
+
 export type AuthActionTypes =
   | AuthSuccess
   | Logout
@@ -71,7 +77,8 @@ export type AuthActionTypes =
   | AuthFail
   | SignupStart
   | ClearError
-  | AutoLogin;
+  | AutoLogin
+  | RefreshUser;
 
 //   import { Action, createAction, props } from '@ngrx/store';
 

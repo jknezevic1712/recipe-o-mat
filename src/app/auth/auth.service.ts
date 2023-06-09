@@ -23,8 +23,6 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((userData) => {
-        console.log('You have been successfully logged in!', userData);
-
         const {
           email,
           photoURL,
@@ -39,6 +37,7 @@ export class AuthService {
             fullName,
             photoURL,
             idToken: userData.credential['idToken'] || '',
+            redirect: true,
           })
         );
       })

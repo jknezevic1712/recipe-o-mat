@@ -18,6 +18,7 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN_START:
     case AUTH_ACTIONS.SIGNUP_START:
+    case AUTH_ACTIONS.REFRESH_USER:
       return {
         ...state,
         user: null,

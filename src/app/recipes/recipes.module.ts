@@ -9,11 +9,12 @@ import { RecipesComponent } from './recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 import { RecipesRoutingModule } from './recipes-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
 import { RecipesListComponent } from './recipe-list/recipes-list.component';
 import { RecipeTileComponent } from './recipe-list/recipe-tile/recipe-tile.component';
 import { RecipeStoreComponent } from './recipe-store/recipe-store.component';
 import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-comment.component';
-import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
 import { ScrollToTopComponent } from '../shared/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
@@ -24,7 +25,6 @@ import { ScrollToTopComponent } from '../shared/scroll-to-top/scroll-to-top.comp
     RecipesListComponent,
     RecipeStoreComponent,
     RecipeCommentComponent,
-    LoadingSpinnerComponent,
     ScrollToTopComponent,
   ],
   imports: [
@@ -34,6 +34,7 @@ import { ScrollToTopComponent } from '../shared/scroll-to-top/scroll-to-top.comp
     ShareButtonsModule,
     ShareIconsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class RecipesModule {}
