@@ -1,33 +1,24 @@
 import { Action } from '@ngrx/store';
 
+import { User } from './auth.model';
+
 export enum AUTH_ACTIONS {
+  GOOGLE_SIGN_IN = 'GOOGLE_SIGN_IN',
   LOGIN_START = 'LOGIN_START',
+  AUTO_LOGIN = 'AUTO_LOGIN',
   AUTH_SUCCESS = 'AUTH_SUCCESS',
   AUTH_FAIL = 'AUTH_FAIL',
   LOGOUT = 'LOGOUT',
   SIGNUP_START = 'SIGNUP_START',
   CLEAR_ERROR = 'CLEAR_ERROR',
-  AUTO_LOGIN = 'AUTO_LOGIN',
-  REFRESH_USER = 'REFRESH_USER',
+  START_USER_REFRESH = 'START_USER_REFRESH',
+  FETCH_USER_DATA = 'FETCH_USER_DATA',
+  REFRESH_USER_DATA = 'REFRESH_USER_DATA',
+  EDIT_USER_DATA = 'EDIT_USER_DATA',
 }
 
-export class AuthSuccess implements Action {
-  readonly type = AUTH_ACTIONS.AUTH_SUCCESS;
-
-  constructor(
-    public payload: {
-      userId: string;
-      email: string;
-      fullName: string;
-      photoURL: string;
-      idToken: string;
-      redirect: boolean;
-    }
-  ) {}
-}
-
-export class Logout implements Action {
-  readonly type = AUTH_ACTIONS.LOGOUT;
+export class GoogleSignIn implements Action {
+  readonly type = AUTH_ACTIONS.GOOGLE_SIGN_IN;
 }
 
 export class LoginStart implements Action {
@@ -40,11 +31,31 @@ export class LoginStart implements Action {
     }
   ) {}
 }
+export class AutoLogin implements Action {
+  readonly type = AUTH_ACTIONS.AUTO_LOGIN;
+}
 
+export class AuthSuccess implements Action {
+  readonly type = AUTH_ACTIONS.AUTH_SUCCESS;
+
+  constructor(
+    public payload: {
+      userId: string;
+      email: string;
+      fullName: string;
+      photoURL: string;
+      redirect: boolean;
+    }
+  ) {}
+}
 export class AuthFail implements Action {
   readonly type = AUTH_ACTIONS.AUTH_FAIL;
 
   constructor(public payload: string) {}
+}
+
+export class Logout implements Action {
+  readonly type = AUTH_ACTIONS.LOGOUT;
 }
 
 export class SignupStart implements Action {
@@ -62,15 +73,28 @@ export class ClearError implements Action {
   readonly type = AUTH_ACTIONS.CLEAR_ERROR;
 }
 
-export class AutoLogin implements Action {
-  readonly type = AUTH_ACTIONS.AUTO_LOGIN;
+export class StartUserRefresh implements Action {
+  readonly type = AUTH_ACTIONS.START_USER_REFRESH;
 }
 
-export class RefreshUser implements Action {
-  readonly type = AUTH_ACTIONS.REFRESH_USER;
+export class FetchUserData implements Action {
+  readonly type = AUTH_ACTIONS.FETCH_USER_DATA;
+}
+
+export class RefreshUserData implements Action {
+  readonly type = AUTH_ACTIONS.REFRESH_USER_DATA;
+
+  constructor(public payload: User) {}
+}
+
+export class EditUserData implements Action {
+  readonly type = AUTH_ACTIONS.EDIT_USER_DATA;
+
+  constructor(public payload: User) {}
 }
 
 export type AuthActionTypes =
+  | GoogleSignIn
   | AuthSuccess
   | Logout
   | LoginStart
@@ -78,7 +102,10 @@ export type AuthActionTypes =
   | SignupStart
   | ClearError
   | AutoLogin
-  | RefreshUser;
+  | StartUserRefresh
+  | FetchUserData
+  | RefreshUserData
+  | EditUserData;
 
 //   import { Action, createAction, props } from '@ngrx/store';
 

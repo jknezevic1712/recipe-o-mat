@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { Logout } from '../store/auth/auth.actions';
+import { GoogleSignIn, Logout } from '../store/auth/auth.actions';
 
 import { Subscription } from 'rxjs';
 
@@ -76,7 +76,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.user) {
       this.store.dispatch(new Logout());
     } else {
-      this.router.navigate(['/auth']);
+      // this.router.navigate(['/auth']);
+      this.store.dispatch(new GoogleSignIn());
     }
   }
 }

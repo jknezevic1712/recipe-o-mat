@@ -3,7 +3,6 @@ export class User {
     public id: string,
     public email: string,
     public fullName: string,
-    public photoURL: string,
-    public idToken: string
+    public photoURL: string
   ) {}
 }

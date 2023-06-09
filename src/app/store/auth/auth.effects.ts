@@ -1,16 +1,139 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import {
+  Auth,
+  GoogleAuthProvider,
+  UserCredential,
+  browserSessionPersistence,
+  setPersistence,
+  signInWithEmailAndPassword,
+  user,
+  signInWithPopup,
+} from '@angular/fire/auth';
 
-import { map, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 
-import { AUTH_ACTIONS, AuthFail, AuthSuccess } from './auth.actions';
+import {
+  AUTH_ACTIONS,
+  AuthFail,
+  AuthSuccess,
+  RefreshUserData,
+  StartUserRefresh,
+  LoginStart,
+} from './auth.actions';
 
 import { User } from './auth.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.reducer';
+import { from } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private router: Router) {}
+  // firestoreDb: Firestore = inject(Firestore);
+  // private auth: Auth = inject(Auth);
+
+  currentUser = this.auth.currentUser;
+  // private userSub$ = user(this.auth)
+  //   .pipe(
+  //     take(1),
+  //     map((user) => user)
+  //   )
+  //   .subscribe((user) => (this.currentUser = user));
+
+  constructor(
+    private actions$: Actions,
+    private router: Router,
+    private store: Store<AppState>,
+    private firestoreDb: Firestore,
+    private auth: Auth
+  ) {}
+
+  loginWithGoogle$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AUTH_ACTIONS.GOOGLE_SIGN_IN),
+        tap(() => {
+          const login = (provider: GoogleAuthProvider) => {
+            signInWithPopup(this.auth, provider)
+              .then((userData) => {
+                const {
+                  email,
+                  photoURL,
+                  uid: userId,
+                  displayName: fullName,
+                } = userData.user;
+
+                this.store.dispatch(
+                  new AuthSuccess({
+                    userId,
+                    email,
+                    fullName,
+                    photoURL,
+                    redirect: true,
+                  })
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+            // return this.auth
+            //   .signInWithPopup(provider)
+            //   .then((userData) => {
+            //     const {
+            //       email,
+            //       photoURL,
+            //       uid: userId,
+            //       displayName: fullName,
+            //     } = userData.user;
+
+            //     this.store.dispatch(
+            //       new AuthSuccess({
+            //         userId,
+            //         email,
+            //         fullName,
+            //         photoURL,
+            //         redirect: true,
+            //       })
+            //     );
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
+          };
+
+          return login(new GoogleAuthProvider());
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  loginWithCredentials$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AUTH_ACTIONS.LOGIN_START),
+      switchMap(async (data: LoginStart) => {
+        const { email, password } = data.payload;
+
+        setPersistence(this.auth, browserSessionPersistence).then(() =>
+          signInWithEmailAndPassword(this.auth, email, password)
+        );
+      }),
+      map(
+        () =>
+          new AuthSuccess({
+            userId: this.currentUser.uid,
+            email: this.currentUser.email,
+            fullName: this.currentUser.displayName,
+            photoURL: this.currentUser.photoURL,
+            redirect: true,
+          })
+      )
+    )
+  );
 
   autoLogin$ = createEffect(() =>
     this.actions$.pipe(
@@ -27,7 +150,6 @@ export class AuthEffects {
           email: userData.email,
           fullName: userData.fullName,
           photoURL: userData.photoURL,
-          idToken: userData.idToken || '',
           redirect: true,
         });
       })
@@ -49,140 +171,77 @@ export class AuthEffects {
     }
   );
 
-  // authSignup = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.SIGNUP_START),
-  //     switchMap((signupAction: AuthActions.SignupStart) => {
-  //       return this.http
-  //         .post<AuthResponseData>(
-  //           `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
-  //           {
-  //             email: signupAction.payload.email,
-  //             password: signupAction.payload.password,
-  //             returnSecureToken: true,
-  //           }
-  //         )
-  //         .pipe(
-  //           tap((resData) => {
-  //             this.authService.setLogoutTimer(+resData.expiresIn * 1000);
-  //           }),
-  //           map((resData) =>
-  //             handleAuthentication(
-  //               resData.localId,
-  //               resData.email,
-  //               resData.idToken,
-  //               +resData.expiresIn
-  //             )
-  //           ),
-  //           catchError((errorRes) => handleError(errorRes))
-  //         );
-  //     })
-  //   )
-  // );
+  fetchUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AUTH_ACTIONS.FETCH_USER_DATA),
+      switchMap(async () => {
+        // this.store.dispatch(new StartUserRefresh());
 
-  // authLogin = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.LOGIN_START),
-  //     switchMap((authData: AuthActions.LoginStart) => {
-  //       return this.http
-  //         .post<AuthResponseData>(
-  //           'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-  //             environment.firebaseAPIKey,
-  //           {
-  //             email: authData.payload.email,
-  //             password: authData.payload.password,
-  //             returnSecureToken: true,
-  //           }
-  //         )
-  //         .pipe(
-  //           tap((resData) => {
-  //             this.authService.setLogoutTimer(+resData.expiresIn * 1000);
-  //           }),
-  //           map((resData) =>
-  //             handleAuthentication(
-  //               resData.localId,
-  //               resData.email,
-  //               resData.idToken,
-  //               +resData.expiresIn
-  //             )
-  //           ),
-  //           catchError((errorRes) => handleError(errorRes))
-  //         );
-  //     })
-  //   )
-  // );
+        new StartUserRefresh();
 
-  // authRedirect = createEffect(
+        let updatedUser: User;
+
+        return from(
+          this.currentUser
+            .reload()
+            .then(() => {
+              const { displayName, email, photoURL, uid } = this.currentUser;
+
+              updatedUser = {
+                id: uid,
+                fullName: displayName,
+                email,
+                photoURL,
+              };
+            })
+            .then(() => {
+              console.log('updatedUser ', updatedUser);
+
+              return updatedUser;
+            })
+        );
+      }),
+      map((updatedUser) => {
+        let newUser: User;
+
+        updatedUser.subscribe((user) => {
+          console.log('user ', user);
+          return (newUser = user);
+        });
+
+        return new RefreshUserData(newUser);
+        // return new RefreshUserData(newUser);
+      })
+    )
+  );
+
+  refreshUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AUTH_ACTIONS.REFRESH_USER_DATA),
+      map((userData: User) => {
+        return new AuthSuccess({
+          userId: userData.id,
+          email: userData.email,
+          fullName: userData.fullName,
+          photoURL: userData.photoURL,
+          redirect: false,
+        });
+      })
+    )
+  );
+
+  // editUserData$ = createEffect(
   //   () =>
   //     this.actions$.pipe(
-  //       ofType(AUTH_ACTIONS.AUTH_SUCCESS),
-  //       tap((authSuccessAction: AuthSuccess) => {
-  //         // if (authSuccessAction.payload.redirect) {
-  //         this.router.navigate(['/']);
-  //         // }
-  //       })
-  //     ),
-  //   {
-  //     dispatch: false,
-  //   }
-  // );
+  //       ofType(PROFILE_ACTIONS.EDIT),
+  //       switchMap((user) => {
+  //         console.log('CURRENT USER ', this.currentUser);
+  //         // let user = this.currentUser;
+  //         // const userSub = this.store.select('auth', 'user').pipe(take(1), map((user) => user)).subscribe((user) => user = user);
 
-  // autoLogin = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.AUTO_LOGIN),
-  //     map(() => {
-  //       const userData: {
-  //         id: string;
-  //         email: string;
-  //         _token: string;
-  //         _tokenExpirationDate: string;
-  //       } = JSON.parse(localStorage.getItem('userData'));
-
-  //       if (!userData) {
-  //         return;
-  //       }
-
-  //       const loadedUser = new User(
-  //         userData.id,
-  //         userData.email,
-  //         userData._token,
-  //         new Date(userData._tokenExpirationDate)
-  //       );
-
-  //       if (loadedUser.token) {
-  //         const expirationDuration =
-  //           new Date(userData._tokenExpirationDate).getTime() -
-  //           new Date().getTime();
-  //         this.authService.setLogoutTimer(expirationDuration);
-
-  //         return new AuthActions.AuthenticateSuccess({
-  //           userId: loadedUser.id,
-  //           email: loadedUser.email,
-  //           token: loadedUser.token,
-  //           expirationDate: new Date(userData._tokenExpirationDate),
-  //           redirect: false,
-  //         });
-  //       }
-
-  //       return {
-  //         type: 'DUMMY',
-  //       };
-  //     })
-  //   )
-  // );
-
-  // authLogout = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(AuthActions.LOGOUT),
-  //       tap(() => {
-  //         this.authService.clearLogoutTimer();
-  //         localStorage.removeItem('userData');
-  //         this.router.navigate(['/auth']);
-  //       })
-  //     ),
-  //   {
-  //     dispatch: false,
-  //   }
+  //         return updateCurrentUser(this.auth, this.currentUser);
+  //       }),
+  //       map(() => )
+  //     )
   // );
 }

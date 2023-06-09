@@ -9,7 +9,6 @@ import { appReducer } from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth/auth.effects';
 import { RecipesEffects } from './store/recipes/recipes.effects';
-import { ProfileEffects } from './store/profile/profile.effects';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -33,7 +32,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
   declarations: [
     AppComponent,
     HomepageComponent,
-    AuthComponent,
+    // AuthComponent,
     ProfileComponent,
     HeaderComponent,
     LayoutComponent,
@@ -46,7 +45,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([AuthEffects, RecipesEffects, ProfileEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipesEffects]),
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

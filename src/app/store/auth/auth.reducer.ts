@@ -18,7 +18,7 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN_START:
     case AUTH_ACTIONS.SIGNUP_START:
-    case AUTH_ACTIONS.REFRESH_USER:
+    case AUTH_ACTIONS.START_USER_REFRESH:
       return {
         ...state,
         user: null,
@@ -27,8 +27,8 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
       };
 
     case AUTH_ACTIONS.AUTH_SUCCESS:
-      const { userId, email, fullName, photoURL, idToken } = action.payload;
-      const user = new User(userId, email, fullName, photoURL, idToken);
+      const { userId, email, fullName, photoURL } = action.payload;
+      const user = new User(userId, email, fullName, photoURL);
 
       localStorage.setItem('userData', JSON.stringify(user));
 

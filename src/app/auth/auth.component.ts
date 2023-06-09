@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+import { GoogleSignIn } from '../store/auth/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +23,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     password: FormControl<string>;
   }>;
 
-  constructor(public authService: AuthService) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -66,8 +68,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   handleGoogleSignIn() {
-    this.authService.googleAuth();
+    // this.authService.googleAuth();
+    this.store.dispatch(new GoogleSignIn());
   }
-
-  handleSignOut() {}
 }

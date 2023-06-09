@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../store/auth/auth.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { FetchUserData } from '../store/profile/profile.actions';
+import { FetchUserData } from '../store/auth/auth.actions';
 
 @Component({
   selector: 'app-profile',

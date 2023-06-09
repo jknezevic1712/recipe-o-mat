@@ -12,10 +12,10 @@ const routes: Routes = [
     component: HomepageComponent,
     pathMatch: 'full',
   },
-  {
-    path: 'auth',
-    component: AuthComponent,
-  },
+  // {
+  //   path: 'auth',
+  //   component: AuthComponent,
+  // },
   {
     path: 'profile',
     component: ProfileComponent,
