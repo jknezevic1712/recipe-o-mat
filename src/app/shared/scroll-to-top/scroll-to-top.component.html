@@ -1,6 +1,8 @@
 <div
-  class="fixed bottom-0 right-0 mb-2 mr-2 cursor-pointer p-2 transition-opacity md:p-4 lg:hover:animate-bounce xl:mb-8 xl:mr-0 2xl:mb-8 2xl:mr-60 3xl:mb-40 3xl:mr-[34rem]"
-  [ngClass]="windowScrolled ? 'opacity-100' : 'opacity-0'"
+  class="fixed bottom-0 right-0 mb-2 mr-2 cursor-pointer p-2 transition-all md:p-4 xl:mb-8 xl:mr-0 2xl:mb-8 2xl:mr-60 3xl:mb-40 3xl:mr-[34rem]"
+  [ngClass]="
+    windowScrolled ? 'opacity-100 lg:hover:-translate-y-2' : 'opacity-0'
+  "
   (click)="scrollToTop()"
 >
   <img [src]="iconPath" class="h-10 w-auto md:h-12" />
