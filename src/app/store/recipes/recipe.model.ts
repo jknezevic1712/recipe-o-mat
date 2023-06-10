@@ -5,6 +5,7 @@ export interface Recipe {
   authorPhotoUrl: string;
   name: string;
   description: string;
+  dateCreated: Date;
   imageUrl?: string;
   ingredients?: Ingredient[];
   cookingSteps?: Step[];

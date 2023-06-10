@@ -58,9 +58,11 @@ export class RecipesEffects {
         switchMap((actionData: AddRecipe) => {
           const recipesCollectionRef = collection(this.firestoreDb, 'recipes');
           const customRecipeId = this.firestore.createId();
+          const dateCreated = new Date();
 
           const structuredRecipe = {
             ...actionData.payload,
+            dateCreated,
             id: customRecipeId,
           };
 
