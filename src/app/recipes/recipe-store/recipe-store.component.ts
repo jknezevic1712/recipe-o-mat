@@ -212,10 +212,10 @@ export class RecipeStoreComponent {
 
   handleDisableSaveButton(): boolean {
     if (this.isEditMode) {
-      return !this.recipeStoreForm.valid ||
+      return (
+        !this.recipeStoreForm.valid ||
         (this.recipeStoreForm.valid && !this.recipeStoreForm.dirty)
-        ? true
-        : false;
+      );
     } else {
       return !this.recipeStoreForm.valid ? true : false;
     }
@@ -228,16 +228,8 @@ export class RecipeStoreComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
-
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
-    }
-
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
+    this.routeSub ? this.routeSub.unsubscribe() : null;
+    this.storeSub ? this.storeSub.unsubscribe() : null;
+    this.userSub ? this.userSub.unsubscribe() : null;
   }
 }

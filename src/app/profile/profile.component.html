@@ -1,19 +1,126 @@
 <div
-  class="mx-auto mt-16 px-6 lg:px-8"
-  [ngClass]="loading ? 'bg-transparent' : 'bg-zinc-300'"
+  class="mx-auto mt-16 min-h-[calc(100vh-64px)] px-6 lg:px-8"
+  [ngClass]="isLoading ? 'bg-transparent' : 'bg-zinc-300'"
 >
   <div
     class="mt-80 flex h-full w-full items-center justify-center"
-    *ngIf="loading"
+    *ngIf="isLoading"
   >
     <div class="h-28 w-28">
       <app-loading-spinner></app-loading-spinner>
     </div>
   </div>
   <div
-    class="grid grid-cols-1 place-content-center place-items-center gap-x-8 gap-y-8 pb-8 pt-8 lg:mx-0 xl:grid-flow-dense xl:grid-cols-2"
-    *ngIf="!loading"
+    class="flex flex-col items-center justify-center py-8 text-start text-zinc-900"
+    *ngIf="!isLoading"
   >
-    <p>Profile page</p>
+    <div class="mb-6 flex w-full items-center justify-start">
+      <img
+        [src]="user.photoURL"
+        class="mr-8 block h-20 w-20 max-w-full rounded-full align-middle md:h-28 md:w-28"
+      />
+      <span class="text-lg font-bold italic md:text-xl xl:text-2xl">{{
+        user.fullName
+      }}</span>
+    </div>
+    <div
+      class="flex w-full max-w-md flex-col items-center justify-center rounded-sm p-4 text-center text-zinc-900 opacity-90 shadow-xl md:mt-20 xl:max-w-xl 3xl:max-w-2xl 3xl:p-8"
+    >
+      <form class="w-full" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="mb-8 flex w-full items-center justify-end">
+          <button
+            type="submit"
+            class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-6 py-2 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed md:px-8 md:py-3 3xl:px-12 3xl:py-3"
+            [disabled]="handleDisableSaveButton()"
+          >
+            <div
+              class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
+              [ngClass]="
+                !handleDisableSaveButton()
+                  ? 'bg-blue-500 group-hover:w-3'
+                  : 'bg-zinc-300'
+              "
+            ></div>
+            <span
+              class="relative transition-all md:text-lg xl:text-xl"
+              [ngClass]="
+                !handleDisableSaveButton()
+                  ? 'text-zinc-100 group-hover:text-zinc-900'
+                  : 'text-zinc-900'
+              "
+            >
+              Save
+            </span>
+          </button>
+        </div>
+        <div class="flex w-full flex-col py-4">
+          <div
+            class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+          >
+            <label for="email" class="pr-4">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
+              formControlName="email"
+            />
+          </div>
+          <span
+            class="pt-4 text-rose-600"
+            *ngIf="
+              !profileForm.controls.email.valid &&
+              profileForm.controls.email.touched
+            "
+          >
+            Please enter valid e-mail!
+          </span>
+        </div>
+
+        <div class="flex w-full flex-col py-4">
+          <div
+            class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+          >
+            <label for="fullName" class="pr-4">Full Name</label>
+            <textarea
+              id="fullName"
+              class="min-h-[125px] w-full max-w-[200px] resize-y rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
+              formControlName="fullName"
+            ></textarea>
+          </div>
+          <span
+            class="pt-4 text-rose-600"
+            *ngIf="
+              !profileForm.controls.fullName.valid &&
+              profileForm.controls.fullName.touched
+            "
+          >
+            Please enter valid full name!
+          </span>
+        </div>
+
+        <div class="flex w-full flex-col py-4">
+          <div
+            class="flex w-full items-center justify-between md:text-lg xl:text-xl"
+          >
+            <label for="photoURL" class="pr-4">User photo URL</label>
+            <input
+              type="text"
+              id="photoURL"
+              class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
+              formControlName="photoURL"
+            />
+          </div>
+          <span
+            class="pt-4 text-rose-600"
+            *ngIf="
+              !profileForm.controls.photoURL.valid &&
+              profileForm.controls.photoURL.touched
+            "
+          >
+            Please enter valid user photo url!
+          </span>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

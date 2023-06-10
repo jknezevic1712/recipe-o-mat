@@ -70,6 +70,12 @@ export function authReducer(state = initialState, action: AuthActionTypes) {
         authError: null,
       };
 
+    case AUTH_ACTIONS.FETCH_USER_DATA:
+      return {
+        ...state,
+        loading: true,
+      };
+
     default:
       return state;
   }
