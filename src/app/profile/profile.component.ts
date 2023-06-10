@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -34,14 +28,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
+    this.store.dispatch(new FetchUserData());
     this.authSub = this.store.select('auth').subscribe((authState) => {
       this.user = authState.user;
       this.isLoading = authState.loading;
+
+      this.initForm();
     });
-
-    this.store.dispatch(new FetchUserData());
-
-    this.initForm();
   }
 
   ngOnDestroy(): void {
@@ -60,21 +53,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCreateGroupFormValueChange() {
-    const initialValue = this.profileForm.value;
-
-    this.profileForm.valueChanges.subscribe((value) => {
-      this.hasFormChanged = Object.keys(initialValue).some(
-        (key) => this.profileForm.value[key] != initialValue[key]
-      );
-    });
-
-    console.log('CHANGED ? ', this.hasFormChanged);
-  }
-
   handleDisableSaveButton(): boolean {
-    this.onCreateGroupFormValueChange();
-
     return (
       !this.profileForm.valid ||
       (this.profileForm.valid && !this.profileForm.dirty)
@@ -82,7 +61,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('SUBMIT!');
     const newUserData = {
       ...this.profileForm.value,
     };

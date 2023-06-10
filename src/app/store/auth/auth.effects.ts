@@ -1,19 +1,18 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { Firestore } from '@angular/fire/firestore';
 import {
   Auth,
   GoogleAuthProvider,
-  UserCredential,
   browserSessionPersistence,
   setPersistence,
   signInWithEmailAndPassword,
-  user,
   signInWithPopup,
+  updateProfile,
+  updateEmail,
 } from '@angular/fire/auth';
 
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import {
   AUTH_ACTIONS,
@@ -22,24 +21,22 @@ import {
   RefreshUserData,
   StartUserRefresh,
   LoginStart,
+  EditUserData,
+  FetchUserData,
 } from './auth.actions';
 
 import { User } from './auth.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
-import { from } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  // firestoreDb: Firestore = inject(Firestore);
-  // private auth: Auth = inject(Auth);
   updatedUser: User;
 
   constructor(
     private actions$: Actions,
     private router: Router,
     private store: Store<AppState>,
-    private firestoreDb: Firestore,
     private auth: Auth
   ) {}
 
@@ -71,30 +68,6 @@ export class AuthEffects {
               .catch((error) => {
                 console.log(error);
               });
-
-            // return this.auth
-            //   .signInWithPopup(provider)
-            //   .then((userData) => {
-            //     const {
-            //       email,
-            //       photoURL,
-            //       uid: userId,
-            //       displayName: fullName,
-            //     } = userData.user;
-
-            //     this.store.dispatch(
-            //       new AuthSuccess({
-            //         userId,
-            //         email,
-            //         fullName,
-            //         photoURL,
-            //         redirect: true,
-            //       })
-            //     );
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
           };
 
           return login(new GoogleAuthProvider());
@@ -204,18 +177,35 @@ export class AuthEffects {
     )
   );
 
-  // editUserData$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(PROFILE_ACTIONS.EDIT),
-  //       switchMap((user) => {
-  //         console.log('CURRENT USER ', this.currentUser);
-  //         // let user = this.currentUser;
-  //         // const userSub = this.store.select('auth', 'user').pipe(take(1), map((user) => user)).subscribe((user) => user = user);
+  editUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AUTH_ACTIONS.EDIT_USER_DATA),
+      map((data: EditUserData) => {
+        const { email, fullName, photoURL } = data.payload;
 
-  //         return updateCurrentUser(this.auth, this.currentUser);
-  //       }),
-  //       map(() => )
-  //     )
-  // );
+        updateProfile(this.auth.currentUser, {
+          displayName: fullName,
+          photoURL: photoURL,
+        });
+        updateEmail(this.auth.currentUser, email);
+
+        this.router.navigate(['/']);
+
+        return new FetchUserData();
+      })
+    )
+  );
+
+  logoutUser$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AUTH_ACTIONS.LOGOUT),
+        tap(() => {
+          this.auth.signOut();
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
 }

@@ -81,11 +81,12 @@
             class="flex w-full items-center justify-between md:text-lg xl:text-xl"
           >
             <label for="fullName" class="pr-4">Full Name</label>
-            <textarea
+            <input
+              type="text"
               id="fullName"
-              class="min-h-[125px] w-full max-w-[200px] resize-y rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-[235px] xl:max-w-[260px]"
+              class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
               formControlName="fullName"
-            ></textarea>
+            />
           </div>
           <span
             class="pt-4 text-rose-600"
