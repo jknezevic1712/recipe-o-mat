@@ -102,6 +102,7 @@
         </ul>
       </div>
     </div>
+
     <div class="my-8 w-full" *ngIf="user">
       <div
         class="flex w-full flex-col items-center justify-between md:flex-row"
@@ -109,15 +110,24 @@
         <span class="w-full md:max-w-[200px]">
           <button
             type="button"
+            (click)="handleLikeRecipe()"
+            [disabled]="isLoading"
             class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
           >
             <div
               class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+              [ngClass]="{
+                'bg-rose-500': hasUserLikedRecipe,
+                'w-0 opacity-20': isLoading
+              }"
             ></div>
             <span
-              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+              class="relative flex items-center justify-center text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
             >
-              Like
+              <span class="mr-4 h-6 w-6" *ngIf="isLoading">
+                <app-loading-spinner />
+              </span>
+              {{ hasUserLikedRecipe ? "Unlike" : "Like" }}
             </span>
           </button>
         </span>

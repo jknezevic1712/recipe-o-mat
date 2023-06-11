@@ -10,7 +10,7 @@ export interface Recipe {
   ingredients?: Ingredient[];
   cookingSteps?: Step[];
   comments?: RecipeComment[];
-  likes?: number;
+  likes?: string[]; // Store authorIds' in an array and check if the current users' id is inside of it and afterwards show Like/Unlike
 }
 
 export interface Ingredient {
@@ -27,5 +27,5 @@ export interface RecipeComment {
   authorId: string;
   content: string;
   date?: Date;
-  likes?: number;
+  likes?: string[]; // Store authorIds' in an array and check if the current users' id is inside of it and afterwards show Like/Unlike
 }

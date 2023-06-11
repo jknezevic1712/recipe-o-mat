@@ -67,6 +67,8 @@ export class RecipesEffects {
 
           const structuredRecipe = {
             ...actionData.payload,
+            likes: [],
+            comments: [],
             dateCreated,
             id: customRecipeId,
           };

@@ -31,6 +31,7 @@ export function recipesReducer(
       };
 
     case RECIPE_ACTIONS.FETCH_ALL:
+    case RECIPE_ACTIONS.UPDATE:
       return {
         ...state,
         loading: true,

@@ -1,6 +1,7 @@
 .lds-circle {
-  display: inline-block;
-  transform: translateZ(1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: inherit;
   width: inherit;
 }
@@ -8,7 +9,6 @@
   display: inline-block;
   height: inherit;
   width: inherit;
-  margin: 8px;
   border-radius: 50%;
   background: rgb(245 158 11);
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;

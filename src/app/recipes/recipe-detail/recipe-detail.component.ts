@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription, map, switchMap } from 'rxjs';
 
+import { RecipesService } from '../recipes.service';
+
 import { AppState } from 'src/app/store/app.reducer';
 import { Recipe } from '../../store/recipes/recipe.model';
 import { User } from 'src/app/store/auth/auth.model';
@@ -15,17 +17,24 @@ import { User } from 'src/app/store/auth/auth.model';
 export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   recipeIndex: number;
+  isLoading = false;
+
   user: User;
   isUserRecipeAuthor: boolean;
+  hasUserLikedRecipe: boolean;
+
   showAddCommentModal: boolean;
   isShareMenuOpen = false;
+
   private routeSub: Subscription;
+
   blankImagePlaceholder = 'src/assets/blank_image_placeholder.webp';
 
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private recipesService: RecipesService
   ) {}
 
   ngOnInit() {
@@ -39,13 +48,21 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         switchMap((id) => {
           this.recipeIndex = id;
 
-          return this.store.select('recipes', 'recipesList');
+          return this.store.select('recipes');
         }),
-        map((recipeList) =>
-          recipeList.find((recipe, idx) => idx === this.recipeIndex)
-        )
+        map((recipeState) => {
+          this.isLoading = recipeState.loading;
+
+          return recipeState.recipesList.find(
+            (recipe, idx) => idx === this.recipeIndex
+          );
+        })
       )
-      .subscribe((recipe) => (this.recipe = recipe));
+      .subscribe((recipe) => {
+        this.recipe = recipe;
+
+        return this.toggleLikeButton();
+      });
 
     this.user
       ? (this.isUserRecipeAuthor = this.user.id === this.recipe.authorId)
@@ -72,5 +89,21 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   handleShowShareMenu() {
     this.isShareMenuOpen = !this.isShareMenuOpen;
+  }
+
+  handleLikeRecipe() {
+    this.recipesService.likeRecipe(this.recipe, this.user);
+  }
+
+  toggleLikeButton() {
+    let findUserId: string;
+
+    if (this.recipe.likes !== undefined) {
+      findUserId = this.recipe.likes.find((el) => el === this.user.id);
+    } else {
+      return (this.hasUserLikedRecipe = false);
+    }
+
+    return (this.hasUserLikedRecipe = findUserId ? true : false);
   }
 }
