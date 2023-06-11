@@ -3,11 +3,13 @@
   [routerLink]="'/recipes/' + recipeIndex"
 >
   <img
-    [src]="
+    [ngSrc]="
       recipe.imageUrl
         ? recipe.imageUrl
-        : '../../../assets/blank_image_placeholder.png'
+        : '../../../assets/blank_image_placeholder.webp'
     "
+    height="100"
+    width="100"
     class="block aspect-video h-auto w-full max-w-full object-cover align-middle sm:aspect-2/1 lg:aspect-3/2"
   />
   <div
@@ -22,7 +24,9 @@
       </h3>
       <span class="flex max-w-full items-center">
         <img
-          [src]="recipe.authorPhotoUrl"
+          [ngSrc]="recipe.authorPhotoUrl"
+          height="32"
+          width="32"
           class="block h-8 w-8 max-w-full rounded-full align-middle md:h-10 md:w-10"
         />
         <span class="max-w-[80%] pl-4 text-sm leading-6">

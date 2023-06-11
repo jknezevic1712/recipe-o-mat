@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
@@ -35,6 +35,7 @@ import { ScrollToTopComponent } from '../shared/scroll-to-top/scroll-to-top.comp
     ShareIconsModule,
     ReactiveFormsModule,
     SharedModule,
+    NgOptimizedImage,
   ],
 })
 export class RecipesModule {}

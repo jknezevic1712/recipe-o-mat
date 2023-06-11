@@ -46,8 +46,10 @@
     </div>
 
     <img
-      [src]="recipeStoreForm.controls.imageUrl.value"
-      class="aspect-3/2 rounded-sm object-cover object-center shadow-xl md:aspect-video"
+      [ngSrc]="recipeStoreForm.controls.imageUrl.value"
+      height="100"
+      width="100"
+      class="aspect-3/2 h-auto w-auto rounded-sm object-cover object-center shadow-xl md:aspect-video"
     />
 
     <div class="mt-6 flex w-full flex-col items-center justify-center">

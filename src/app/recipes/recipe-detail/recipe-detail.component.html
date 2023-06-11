@@ -6,7 +6,9 @@
       <div class="flex w-fit items-center justify-center">
         <span class="flex max-w-full items-center">
           <img
-            [src]="recipe.authorPhotoUrl"
+            [ngSrc]="recipe.authorPhotoUrl"
+            height="32"
+            width="32"
             class="block h-8 w-8 max-w-full rounded-full align-middle md:h-14 md:w-14"
           />
           <span class="pl-4 text-sm leading-6">
@@ -41,8 +43,10 @@
     </div>
 
     <img
-      [src]="recipe.imageUrl"
-      class="aspect-3/2 rounded-sm object-cover object-center shadow-xl md:aspect-video"
+      [ngSrc]="recipe.imageUrl"
+      height="100"
+      width="100"
+      class="aspect-3/2 h-auto w-auto rounded-sm object-cover object-center shadow-xl md:aspect-video"
     />
 
     <div
