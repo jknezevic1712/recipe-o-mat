@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { orderBy } from 'lodash';
 
 import {
   Firestore,
@@ -47,7 +48,11 @@ export class RecipesEffects {
           takeUntil(this.recipesService.unsubscribe$)
         ) as Observable<Recipe[]>;
       }),
-      map((recipes) => new SaveFetchedRecipes(recipes))
+      map((recipes) => {
+        const sortedRecipes = orderBy(recipes, ['dateCreated'], ['desc']);
+
+        return new SaveFetchedRecipes(sortedRecipes);
+      })
     )
   );
 
