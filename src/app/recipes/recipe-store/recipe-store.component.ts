@@ -150,7 +150,12 @@ export class RecipeStoreComponent {
     this.recipeStoreForm = new FormGroup({
       name: new FormControl(name, Validators.required),
       description: new FormControl(description, Validators.required),
-      imageUrl: new FormControl(imageUrl),
+      imageUrl: new FormControl(
+        imageUrl,
+        Validators.pattern(
+          '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+        )
+      ),
       ingredients: ingredients,
       cookingSteps: cookingSteps,
     });

@@ -49,12 +49,21 @@
             >
               <label for="imageUrl" class="pr-4">Image URL</label>
               <input
-                type="text"
+                type="url"
                 id="imageUrl"
                 class="max-w-[200px] rounded-sm bg-zinc-100 p-1 text-zinc-900 md:max-w-none"
                 formControlName="imageUrl"
               />
             </div>
+            <span
+              class="pt-4 text-rose-600"
+              *ngIf="
+                !recipeStoreForm.controls.imageUrl.valid &&
+                recipeStoreForm.controls.imageUrl.touched
+              "
+            >
+              Please enter valid recipe image URL!
+            </span>
           </div>
 
           <div class="flex w-full flex-col py-4">
