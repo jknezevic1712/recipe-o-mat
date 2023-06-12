@@ -222,9 +222,15 @@ export class RecipeStoreComponent {
   }
 
   handleDeleteRecipe() {
-    this.store.dispatch(new DeleteRecipe(this.recipe.id));
+    const result = confirm('Are you sure you want to delete this recipe?');
 
-    return this.router.navigate(['/recipes']);
+    if (result == true) {
+      this.store.dispatch(new DeleteRecipe(this.recipe.id));
+
+      return this.router.navigate(['/recipes']);
+    }
+
+    return false;
   }
 
   ngOnDestroy(): void {
