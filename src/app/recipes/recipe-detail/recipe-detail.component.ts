@@ -23,7 +23,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   isUserRecipeAuthor: boolean;
   hasUserLikedRecipe: boolean;
 
-  showAddCommentModal: boolean;
+  // showAddCommentModal: boolean;
   isShareMenuOpen = false;
 
   private routeSub: Subscription;
@@ -84,7 +84,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   handleAddShowCommentModal() {
-    this.showAddCommentModal = true;
+    // this.showAddCommentModal = true;
+    alert('Work in progress!');
   }
 
   handleShowShareMenu() {
