@@ -7,7 +7,10 @@
       height="100"
       width="100"
       class="aspect-3/2 h-auto w-auto rounded-sm object-cover object-center shadow-xl md:aspect-video"
-      *ngIf="recipeStoreForm.controls.imageUrl.value !== ''"
+      *ngIf="
+        this.recipeStoreForm.controls.imageUrl.value !== '' &&
+        this.recipeStoreForm.controls.imageUrl.valid
+      "
     />
 
     <div class="mt-6 flex w-full flex-col items-center justify-center">
