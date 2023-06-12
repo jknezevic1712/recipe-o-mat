@@ -26,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
+import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -38,6 +39,7 @@ import { environment } from 'src/environments/environment';
     HeaderComponent,
     LayoutComponent,
     ButtonComponent,
+    ScrollToTopComponent,
   ],
   imports: [
     BrowserModule,
