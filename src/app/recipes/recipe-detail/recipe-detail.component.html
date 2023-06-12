@@ -30,11 +30,11 @@
           class="group relative w-full max-w-fit overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-6 py-2 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed md:px-8 md:py-3 3xl:px-12 3xl:py-3"
         >
           <div
-            class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+            class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
           ></div>
           <button
             type="button"
-            class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+            class="relative text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
           >
             Edit Recipe
           </button>
@@ -115,14 +115,14 @@
             class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
           >
             <div
-              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
               [ngClass]="{
                 'bg-rose-500': hasUserLikedRecipe,
                 'w-0 opacity-20': isLoading
               }"
             ></div>
             <span
-              class="relative flex items-center justify-center text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+              class="relative flex items-center justify-center text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
             >
               <span class="mr-4 h-6 w-6" *ngIf="isLoading">
                 <app-loading-spinner />
@@ -139,10 +139,10 @@
             (click)="handleAddShowCommentModal()"
           >
             <div
-              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
             ></div>
             <span
-              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+              class="relative text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
             >
               Comment
             </span>
@@ -156,10 +156,10 @@
             (click)="handleShowShareMenu()"
           >
             <div
-              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+              class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
             ></div>
             <span
-              class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+              class="relative text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
             >
               Share
             </span>

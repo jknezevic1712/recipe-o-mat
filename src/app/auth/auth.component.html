@@ -76,7 +76,7 @@
                 class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
                 [ngClass]="
                   signInForm.valid
-                    ? 'bg-blue-500 group-hover:w-3'
+                    ? 'bg-blue-500 lg:group-hover:w-3'
                     : 'bg-zinc-300'
                 "
               ></div>
@@ -84,7 +84,7 @@
                 class="relative transition-all md:text-lg xl:text-xl"
                 [ngClass]="
                   signInForm.valid
-                    ? 'text-zinc-100 group-hover:text-zinc-900'
+                    ? 'text-zinc-100 lg:group-hover:text-zinc-900'
                     : 'text-zinc-900'
                 "
               >
@@ -100,10 +100,10 @@
               class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
             >
               <div
-                class="absolute inset-0 w-full bg-emerald-500 transition-all duration-[250ms] ease-out group-hover:w-3"
+                class="absolute inset-0 w-full bg-emerald-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
               ></div>
               <span
-                class="relative text-zinc-100 transition-all group-hover:text-zinc-900 md:text-lg xl:text-xl"
+                class="relative text-zinc-100 transition-all lg:group-hover:text-zinc-900 md:text-lg xl:text-xl"
               >
                 Google
               </span>
@@ -220,7 +220,7 @@
                   class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
                   [ngClass]="
                     signUpForm.valid
-                      ? 'bg-blue-500 group-hover:w-3'
+                      ? 'bg-blue-500 lg:group-hover:w-3'
                       : 'bg-zinc-300'
                   "
                 ></div>
@@ -228,7 +228,7 @@
                   class="relative transition-all md:text-lg xl:text-xl"
                   [ngClass]="
                     signUpForm.valid
-                      ? 'text-zinc-100 group-hover:text-zinc-900'
+                      ? 'text-zinc-100 lg:group-hover:text-zinc-900'
                       : 'text-zinc-900'
                   "
                 >
