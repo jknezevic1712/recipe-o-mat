@@ -232,6 +232,7 @@
           [comment]="comment"
           [commentIdx]="idx"
           [isLastComment]="isLast"
+          (recipeCommentLikeEvent)="handleRecipeCommentLike($event)"
         ></app-recipe-comment>
       </div>
     </div>

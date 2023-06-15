@@ -62,7 +62,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       .subscribe((recipe) => {
         this.recipe = recipe;
         let reversedComments = [...this.recipe.comments];
-        this.recipeComments = reversedComments.reverse();
+        this.recipeComments = reversedComments;
 
         return this.toggleLikeButton();
       });
@@ -101,6 +101,14 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   handleLikeRecipe() {
     this.recipesService.likeRecipe(this.recipe, this.user);
+  }
+
+  handleRecipeCommentLike(recipeCommentIndex: number) {
+    return this.recipesService.likeRecipeComment(
+      this.recipe,
+      this.user,
+      recipeCommentIndex
+    );
   }
 
   toggleLikeButton() {

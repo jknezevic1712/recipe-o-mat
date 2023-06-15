@@ -49,7 +49,23 @@ export class RecipesEffects {
         ) as Observable<Recipe[]>;
       }),
       map((recipes) => {
-        const sortedRecipes = orderBy(recipes, ['dateCreated'], ['desc']);
+        let recipeWithSortedComments = [...recipes].map((recipe, index) => {
+          let newRecipe = { ...recipe };
+          let sortedRecipeComments = orderBy(
+            newRecipe.comments,
+            ['date'],
+            ['desc']
+          );
+
+          newRecipe.comments = sortedRecipeComments;
+          return (recipe = newRecipe);
+        });
+
+        const sortedRecipes = orderBy(
+          recipeWithSortedComments,
+          ['dateCreated'],
+          ['desc']
+        );
 
         return new SaveFetchedRecipes(sortedRecipes);
       })
