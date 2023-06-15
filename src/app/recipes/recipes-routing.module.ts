@@ -21,12 +21,12 @@ const routes: Routes = [
       {
         path: 'store',
         component: RecipeStoreComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'store/:id',
         component: RecipeStoreComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: ':id',

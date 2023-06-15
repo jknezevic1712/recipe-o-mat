@@ -5,13 +5,15 @@
     <div class="flex w-full items-center">
       <span class="flex w-fit items-center border-b border-amber-500 pb-1 pr-2">
         <img
-          [ngSrc]=""
+          [ngSrc]="comment.authorPhotoUrl"
           height="32"
           width="32"
           class="block h-8 w-8 max-w-full rounded-full align-middle md:h-10 md:w-10"
         />
         <span class="max-w-[80%] pl-4 text-sm leading-6">
-          <p class="max-w-full truncate font-semibold">Anonymous</p>
+          <p class="max-w-full truncate font-semibold">
+            {{ comment.authorName }}
+          </p>
         </span>
       </span>
     </div>
@@ -30,7 +32,9 @@
       <div
         class="relative flex text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
       >
-        <div class="absolute left-0 top-0">{{ comment.likes }}</div>
+        <div class="absolute left-0 top-0">
+          {{ comment.likes.length > 0 ? comment.likes.length : 0 }}
+        </div>
         <span class="flex flex-1 items-center justify-center md:ml-6">🤍</span>
       </div>
     </button>

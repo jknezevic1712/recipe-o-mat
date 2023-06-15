@@ -15,6 +15,7 @@ import { RecipesListComponent } from './recipe-list/recipes-list.component';
 import { RecipeTileComponent } from './recipe-list/recipe-tile/recipe-tile.component';
 import { RecipeStoreComponent } from './recipe-store/recipe-store.component';
 import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-comment.component';
+import { RecipeCommentModalComponent } from './recipe-detail/recipe-comment-modal/recipe-comment-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RecipeCommentComponent } from './recipe-detail/recipe-comment/recipe-co
     RecipesListComponent,
     RecipeStoreComponent,
     RecipeCommentComponent,
+    RecipeCommentModalComponent,
   ],
   imports: [
     CommonModule,

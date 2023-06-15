@@ -1,0 +1,80 @@
+<div
+  class="fixed left-0 top-0 flex h-full min-h-screen w-full items-center justify-center bg-zinc-950 bg-opacity-30"
+  (keydown)="handleModalClose($event)"
+>
+  <div class="w-4/5 max-w-xl rounded-md bg-zinc-300 p-4 shadow-xl">
+    <div class="flex w-full items-center justify-end">
+      <svg
+        (click)="handleModalClose()"
+        class="mb-2 block h-8 w-auto cursor-pointer text-zinc-900"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </div>
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="commentModalForm"
+      class="flex h-full flex-col items-center justify-center gap-8"
+    >
+      <div class="flex w-full flex-col items-center justify-center">
+        <div
+          class="flex w-full items-center justify-between text-zinc-900 md:text-lg xl:text-xl"
+        >
+          <label
+            for="commentText"
+            class="flex w-full flex-col items-center justify-center"
+            >Comment
+            <textarea
+              id="commentText"
+              class="mt-8 min-h-[125px] w-full resize-y rounded-sm bg-zinc-100 p-1 md:max-w-xs"
+              formControlName="commentText"
+            ></textarea>
+          </label>
+        </div>
+        <span
+          class="pt-4 text-rose-600"
+          *ngIf="
+            !commentModalForm.controls.commentText.valid &&
+            commentModalForm.controls.commentText.touched
+          "
+        >
+          Please enter something!
+        </span>
+      </div>
+      <button
+        type="submit"
+        form="recipeStoreFormSubmitRef"
+        [disabled]="handleDisableSendButton()"
+        (click)="onSubmit()"
+        class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-6 py-2 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed md:px-8 md:py-3 3xl:px-12 3xl:py-3"
+      >
+        <div
+          class="absolute inset-0 w-full transition-all duration-[250ms] ease-out"
+          [ngClass]="
+            !handleDisableSendButton()
+              ? 'bg-blue-500 lg:group-hover:w-3'
+              : 'bg-zinc-300'
+          "
+        ></div>
+        <span
+          class="relative transition-all md:text-lg xl:text-xl"
+          [ngClass]="
+            !handleDisableSendButton()
+              ? 'text-zinc-100 lg:group-hover:text-zinc-900'
+              : 'text-zinc-900'
+          "
+        >
+          Send
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

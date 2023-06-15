@@ -136,7 +136,7 @@
           <button
             type="button"
             class="group relative w-full max-w-xs overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-8 py-3 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed 3xl:px-12 3xl:py-3"
-            (click)="handleAddShowCommentModal()"
+            (click)="handleShowCommentModal()"
           >
             <div
               class="absolute inset-0 w-full bg-blue-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
@@ -235,5 +235,12 @@
         ></app-recipe-comment>
       </div>
     </div>
+
+    <app-recipe-comment-modal
+      *ngIf="showCommentModal"
+      [recipe]="recipe"
+      [user]="user"
+      (showCommentModalEvent)="handleShowCommentModal($event)"
+    ></app-recipe-comment-modal>
   </div>
 </div>
