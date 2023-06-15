@@ -6,7 +6,7 @@ import { Subscription, map, switchMap } from 'rxjs';
 import { RecipesService } from '../recipes.service';
 
 import { AppState } from 'src/app/store/app.reducer';
-import { Recipe } from '../../store/recipes/recipe.model';
+import { Recipe, RecipeComment } from '../../store/recipes/recipe.model';
 import { User } from 'src/app/store/auth/auth.model';
 
 @Component({
@@ -17,6 +17,7 @@ import { User } from 'src/app/store/auth/auth.model';
 export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   recipeIndex: number;
+  recipeComments: RecipeComment[];
   isLoading = false;
 
   user: User;
@@ -60,6 +61,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe((recipe) => {
         this.recipe = recipe;
+        let reversedComments = [...this.recipe.comments];
+        this.recipeComments = reversedComments.reverse();
 
         return this.toggleLikeButton();
       });

@@ -228,7 +228,7 @@
         </h2>
         <app-recipe-comment
           class="w-full"
-          *ngFor="let comment of recipe.comments; index as idx; last as isLast"
+          *ngFor="let comment of recipeComments; index as idx; last as isLast"
           [comment]="comment"
           [commentIdx]="idx"
           [isLastComment]="isLast"
