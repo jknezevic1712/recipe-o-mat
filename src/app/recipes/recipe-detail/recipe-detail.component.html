@@ -11,13 +11,28 @@
             width="32"
             class="block h-8 w-8 max-w-full rounded-full align-middle md:h-14 md:w-14"
           />
-          <span class="pl-4 text-sm leading-6">
-            <p
+          <p class="flex flex-col pl-4 text-sm leading-6">
+            <span
               class="max-w-full text-base font-semibold text-zinc-900 md:text-xl xl:text-2xl"
             >
               {{ recipe.authorName }}
-            </p>
-          </span>
+            </span>
+            <span
+              class="max-w-full text-start text-sm font-semibold text-rose-400 md:text-lg xl:text-xl"
+              *ngIf="recipe.likes.length > 0"
+            >
+              🤍 {{ recipe.likes.length }}
+            </span>
+          </p>
+          <!-- <p
+            class="pl-4 text-base font-semibold leading-6 text-rose-400 md:text-xl xl:text-2xl"
+          >
+            <span>
+              {{ recipe.likes.length }}
+            </span>
+            🤍
+            likes
+          </p> -->
         </span>
       </div>
 
@@ -231,6 +246,7 @@
           *ngFor="let comment of recipeComments; index as idx; last as isLast"
           [comment]="comment"
           [commentIdx]="idx"
+          [userId]="user.id"
           [isLastComment]="isLast"
           (recipeCommentLikeEvent)="handleRecipeCommentLike($event)"
         ></app-recipe-comment>

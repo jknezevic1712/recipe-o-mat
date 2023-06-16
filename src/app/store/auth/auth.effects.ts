@@ -116,7 +116,7 @@ export class AuthEffects {
           email: userData.email,
           fullName: userData.fullName,
           photoURL: userData.photoURL,
-          redirect: true,
+          redirect: false,
         });
       })
     )

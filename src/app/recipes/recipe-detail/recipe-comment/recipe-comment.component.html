@@ -28,7 +28,7 @@
       class="group relative h-fit w-full max-w-full overflow-hidden rounded-md bg-zinc-100 bg-opacity-70 px-4 py-1.5 shadow-xl transition-all hover:bg-opacity-100 disabled:cursor-not-allowed md:max-w-fit md:px-8 md:py-2 3xl:px-12 3xl:py-3"
     >
       <div
-        class="absolute inset-0 w-full bg-rose-500 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
+        class="absolute inset-0 w-full bg-rose-400 transition-all duration-[250ms] ease-out lg:group-hover:w-3"
       ></div>
       <div
         class="relative flex text-zinc-100 transition-all md:text-lg lg:group-hover:text-zinc-900 xl:text-xl"
@@ -36,7 +36,9 @@
         <div class="absolute left-0 top-0">
           {{ comment.likes.length > 0 ? comment.likes.length : 0 }}
         </div>
-        <span class="flex flex-1 items-center justify-center md:ml-6">🤍</span>
+        <span class="flex flex-1 items-center justify-center md:ml-6">{{
+          hasUserLikedComment() ? "💔" : "❤️"
+        }}</span>
       </div>
     </button>
   </div>
