@@ -24,15 +24,6 @@
               🤍 {{ recipe.likes.length }}
             </span>
           </p>
-          <!-- <p
-            class="pl-4 text-base font-semibold leading-6 text-rose-400 md:text-xl xl:text-2xl"
-          >
-            <span>
-              {{ recipe.likes.length }}
-            </span>
-            🤍
-            likes
-          </p> -->
         </span>
       </div>
 
@@ -243,7 +234,7 @@
         </h2>
         <app-recipe-comment
           class="w-full"
-          *ngFor="let comment of recipeComments; index as idx; last as isLast"
+          *ngFor="let comment of recipe.comments; index as idx; last as isLast"
           [comment]="comment"
           [commentIdx]="idx"
           [userId]="user.id"
